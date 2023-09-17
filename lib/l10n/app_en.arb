@@ -1,0 +1,48 @@
+{
+    "language": "English",
+    "@language":{
+      "description": "The current Language"
+    },
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+      "description": "A programmer greeting"
+    },
+    "hello": "Hello {username}",
+    "@hello": {
+      "description": "A welcome message",
+      "placeholders": {
+         "username": {
+           "type": "String"
+         }
+      }
+    },
+    "choose_lang": "choose language\nand\ntheme mode",
+    "how_do_you_feel": "Tax & Fee",
+    "how_do_you_feel_text": "Pay government land tax and application fee right now",
+    "get_started": "Get Started",
+    "near_hospital": "Sell plot",
+    "near_hospital_description": "Sell plot description",
+    "government_site": "Official government site",
+    "government_site_description": "Official government site description",
+    "nafasi_za_kazi": "Job vacancies",
+    "dili_za_haraka": "Quick deals",
+
+    "kundi_la_makazi": "Housing plots",
+    "kundi_la_mashamba": "Farming plots",
+    "kundi_la_viwanda": "Industry plots",
+    "kundi_la_michezo": "Sport plots",
+    "kundi_la_biashara": "Business plots",
+
+    "tafiti_za_hatimiliki": "ALTA/NSPS Land Title Surveys",
+    "tafiti_za_mipaka": "Boundary Surveys",
+    "tafiti_za_topografia": "Topographic Surveys",
+    "tafiti_za_ujenzi": "Construction Staking",
+    "tafiti_za_kujengwa": "As-Built Surveys",
+    "tafiti_za_njia": "Route Surveys",
+    "tafiti_za_mafuriko": "Floodplain Surveys/Elevation Certifications",
+
+    "visit": "Visit",
+    "close": "Close",
+    "read_more": "Read more",
+    "hospital_list": "Our services"
+}

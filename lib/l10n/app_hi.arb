@@ -1,0 +1,34 @@
+{
+    "language": "मानक हिन्दी",
+    "helloWorld": "नमस्ते दुनिया!",
+    "hello": "नमस्ते {username}",
+    "choose_lang": "भाषा और थीम मोड चुनें",
+    "how_do_you_feel": "आपको कैसा लगता है",
+    "how_do_you_feel_text": "अभी अपना मेडिकल कार्ड भरें",
+    "get_started": "शुरू हो जाओ",
+    "near_hospital": "अस्पताल के पास",
+  "near_hospital_description": "Maelezo ya kuuza kiwanja",
+    "government_site": "Ukurasa rasmi wa serikali",
+    "government_site_description": "Maelezo kuhusu ukurasa rasmi wa serikali",
+    "nafasi_za_kazi": "Nafasi za kazi",
+    "dili_za_haraka": "Dili za haraka",
+
+    "kundi_la_makazi": "Viwanja vya makazi",
+    "kundi_la_mashamba": "Viwanja vya mashamba",
+    "kundi_la_viwanda": "Viwanja vya viwanda",
+    "kundi_la_michezo": "Viwanja vya michezo",
+    "kundi_la_biashara": "Viwanja vya biashara",
+
+    "tafiti_za_hatimiliki": "Tafiti za Hatimiliki ya Ardhi",
+    "tafiti_za_mipaka": "Tafiti za mipaka",
+    "tafiti_za_topografia": "Tafiti za topografia",
+    "tafiti_za_ujenzi": "Tafiti za kiwango cha ujenzi",
+    "tafiti_za_kujengwa": "Tafiti za ilivyojengwa",
+    "tafiti_za_njia": "Tafiti za njia",
+    "tafiti_za_mafuriko": "Tafiti za mafuriko/miinuko",
+
+    "visit": "मिलने जाना",
+    "close": "मबंद करना",
+    "read_more": "अधिक पढ़ें",
+    "hospital_list": "अस्पतालों की सूची"
+}
