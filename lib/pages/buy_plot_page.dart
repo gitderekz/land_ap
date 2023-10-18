@@ -5,6 +5,8 @@ import 'package:health_ai_test/components/doctor_card.dart';
 import '../components/options_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../components/personalize_button.dart';
+
 class BuyPlotPage extends StatefulWidget {
   String hospitalId,hospitalName,hospitalImage,hospitalLocation,hospitalDescription;
   var hospitalSnapshot,receptionPhone;
@@ -87,25 +89,13 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                       ]
                   ),
                   //profile
-                  InkWell(
-                    onTap: ()=>showDialog(context: context, builder: (BuildContext context) { return OptionsPopup(
-                        userFirstName:widget.userFirstName,
-                        userLastName:widget.userLastName,
-                        userAddress:widget.userAddress,
-                        userGender:widget.userGender,
-                        userPhone:widget.userPhone,
-                        userId:widget.userId); }),
-                    child: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.green[500],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        )
-                    ),
+                  PersonalizeButton(
+                      userFirstName:widget.userFirstName,
+                      userLastName:widget.userLastName,
+                      userAddress:widget.userAddress,
+                      userGender:widget.userGender,
+                      userPhone:widget.userPhone,
+                      userId:widget.userId
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_ai_test/components/options_popup.dart';
 import 'package:health_ai_test/components/payments_popup.dart';
@@ -10,7 +11,9 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../components/clinic_cards.dart';
+import '../components/gradient_animation_welcome.dart';
 import '../components/hospital_card.dart';
+import '../components/personalize_button.dart';
 import '../components/read_more.dart';
 import 'doctor_appointment.dart';
 import 'hospital_page.dart';
@@ -24,6 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late TextEditingController textController = TextEditingController();
   final userCollection = FirebaseFirestore.instance.collection('users');
   var hospitalSnapshot;
   String userFirstName = '';
@@ -42,6 +46,13 @@ class _HomePageState extends State<HomePage> {
   String receptionPhone = '';
   String role = 'patient';
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    textController = TextEditingController(/*text: 'wanaume'*/);
+  }
+
   void openHospitalPage(){
     Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalPage(
         hospitalId:hospitalId,hospitalName:nearHospitalName,hospitalImage:nearHospitalImage,hospitalLocation:nearHospitalLocation,hospitalDescription:nearHospitalDescription,hospitalSnapshot: hospitalSnapshot,// user details
@@ -53,6 +64,12 @@ class _HomePageState extends State<HomePage> {
         userId:userId,
         receptionPhone:receptionPhone
     )));
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
   }
 
   @override
@@ -76,60 +93,75 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 //app bar
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //Name
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 8,),
-                            FutureBuilder(
-                                future: _fetchUserDetails(),
-                                builder: (context,snapshot) {
-                                  if(snapshot.connectionState != ConnectionState.done){
-                                    return Text('wait...');
+                WelcomeGradientBackground(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //Name
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              FutureBuilder(
+                                  future: _fetchUserDetails(),
+                                  builder: (context,snapshot) {
+                                    if(snapshot.connectionState != ConnectionState.done){
+                                      return Text('wait...');
+                                    }
+                                    return Text('Hi, $userFirstName',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        // fontSize: 16,
+                                        color: Colors.black38
+                                      ),
+                                    );
                                   }
-                                  return Text('Hi, $userFirstName',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  );
-                                }
-                            )
-                          ]
-                      ),
+                              ),
+                              SizedBox(width: 8.0,),
+                            ]
+                        ),
 
-                      //profile
-                      InkWell(
-                        onTap: ()=>showDialog(context: context, builder: (BuildContext context) { return OptionsPopup(
+                        //profile
+
+                        //search bar
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                            child: Container(
+                                height: 35,
+                                margin: const EdgeInsets.only(right: 8.0,top: 4.0,bottom: 8.0),
+                                // decoration: BoxDecoration(
+                                //   color: Theme.of(context).cardColor,
+                                //   borderRadius: BorderRadius.circular(20),
+                                // ),
+                                child: CupertinoSearchTextField(
+                                  controller: textController,
+                                  placeholder: 'Search',
+                                  borderRadius: BorderRadius.circular(20),
+                                )
+                              // const TextField(
+                              //   decoration: InputDecoration(
+                              //     prefixIcon: Icon(Icons.search),
+                              //     border: InputBorder.none,
+                              //     hintText: 'Search product',
+                              //   ),
+                              // ),
+                            ),
+                          ),
+                        ),
+
+                        //profile
+                        PersonalizeButton(
                             userFirstName:userFirstName,
                             userLastName:userLastName,
                             userAddress:userAddress,
                             userGender:userGender,
                             userPhone:userPhone,
-                            userId:userId); }),
-                        child: Container(
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.green[500],//greenCardColor,//Colors.white,//.transparent,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child:
-                            // Image.asset(
-                            //   'assets/icons/logo48.ico',
-                            //   height: 30,
-                            // ),
-                            Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            )
+                            userId:userId
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 10,),
@@ -138,31 +170,13 @@ class _HomePageState extends State<HomePage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        //search bar
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                          child: Container(
-                            // padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).bottomAppBarColor,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.search),
-                                border: InputBorder.none,
-                                hintText: 'Search',
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 8.0,),
 
                         //ushuru na ada card
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Container(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               boxShadow: [BoxShadow(color: Colors.green.shade400,offset: Offset(2, -2),blurRadius: 2,spreadRadius:1,blurStyle: BlurStyle.normal)],
                               color: greenCardColor,
@@ -176,6 +190,10 @@ class _HomePageState extends State<HomePage> {
                                   height: 100,
                                   width: 100,
                                   child: Lottie.asset('assets/jsons/payment.json'),
+                                    decoration: BoxDecoration(
+                                      color: Colors.lightGreenAccent[100],
+                                      borderRadius: BorderRadius.circular(20),
+                                    )
                                 ),
                                 SizedBox(width: 20.0,),
 
@@ -233,7 +251,7 @@ class _HomePageState extends State<HomePage> {
 
                         //uza kiwanja kichwa
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -250,9 +268,9 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 2,),
                         //uza kiwanja card
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Container(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(12),
@@ -265,6 +283,10 @@ class _HomePageState extends State<HomePage> {
                                   height: 100,
                                   width: 100,
                                   child: Lottie.asset('assets/jsons/business.json'),
+                                    decoration: BoxDecoration(
+                                      color: Colors.lightGreenAccent[100],
+                                      borderRadius: BorderRadius.circular(20),
+                                    )
                                   // Image.network(
                                   //   nearHospitalImage,
                                   //   height: 100,
@@ -352,7 +374,7 @@ class _HomePageState extends State<HomePage> {
 
                         //Hospitals list title
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -377,7 +399,7 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 8,),
                         //Hospitals list cards
                         Container(
-                          height: 310,
+                          height: 250,
                           child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance.collection("hospitals").snapshots(),
                             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -467,7 +489,7 @@ class _HomePageState extends State<HomePage> {
 
                         //ukurasa wa serikali kichwa
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -484,9 +506,9 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 8,),
                         //ukurasa wa serikali card
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Container(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(12.0),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(12),
@@ -499,12 +521,16 @@ class _HomePageState extends State<HomePage> {
                                   height: 100,
                                   width: 100,
                                   child: Lottie.asset('assets/jsons/web.json'),
+                                    decoration: BoxDecoration(
+                                      color: Colors.lightGreenAccent[100],
+                                      borderRadius: BorderRadius.circular(20),
+                                    )
                                   // Image.network(
                                   //   nearHospitalImage,
                                   //   height: 100,
                                   // ),
                                 ),
-                                SizedBox(width: 20.0,),
+                                SizedBox(width: 2.0,),
 
                                 //near hospital
                                 Expanded(
@@ -534,23 +560,23 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: 16,
                                         ),
                                       ),
-                                      SizedBox(height: 12,),
-                                      ReadMore(
-                                          hospitalImagePath: nearHospitalImage,
-                                          hospitalName: AppLocalizations.of(context)!.government_site,
-                                          hospitalLocation: nearHospitalLocation,
-                                          hospitalDescription: AppLocalizations.of(context)!.government_site_description,
-                                          hospitalSnapshot: hospitalSnapshot,
-                                          hospitalId:hospitalId,
-                                          receptionPhone:receptionPhone,
-                                          // user details
-                                          userFirstName:userFirstName,
-                                          userLastName:userLastName,
-                                          userAddress:userAddress,
-                                          userGender:userGender,
-                                          userPhone:userPhone,
-                                          userId:userId
-                                      ),
+                                      // SizedBox(height: 12,),
+                                      // ReadMore(
+                                      //     hospitalImagePath: nearHospitalImage,
+                                      //     hospitalName: AppLocalizations.of(context)!.government_site,
+                                      //     hospitalLocation: nearHospitalLocation,
+                                      //     hospitalDescription: AppLocalizations.of(context)!.government_site_description,
+                                      //     hospitalSnapshot: hospitalSnapshot,
+                                      //     hospitalId:hospitalId,
+                                      //     receptionPhone:receptionPhone,
+                                      //     // user details
+                                      //     userFirstName:userFirstName,
+                                      //     userLastName:userLastName,
+                                      //     userAddress:userAddress,
+                                      //     userGender:userGender,
+                                      //     userPhone:userPhone,
+                                      //     userId:userId
+                                      // ),
                                       SizedBox(height: 12,),
                                       InkWell(
                                         onTap: openHospitalPage,
@@ -581,18 +607,19 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           padding: EdgeInsets.symmetric(vertical: 2.0),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100]),
+                            gradient: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark?
+                            LinearGradient(colors: [Colors.transparent,Colors.transparent],):
+                            LinearGradient(colors: [Colors.white30,Colors.lightGreen.shade100,Colors.green.shade100],),//lime,lightgreen
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5),),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   AppLocalizations.of(context)!.nafasi_za_kazi,
                                   style: TextStyle(
-                                    color: Colors.green,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -612,10 +639,10 @@ class _HomePageState extends State<HomePage> {
                         //nafasi za kazi card
                         Container(
                           height: 100,
-                          // padding: EdgeInsets.symmetric(vertical: 2.0),
-                          // margin: EdgeInsets.symmetric(horizontal: 2.0),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100],),
+                            gradient: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark?
+                            LinearGradient(colors: [Colors.transparent,Colors.transparent],):
+                            LinearGradient(colors: [Colors.white30,Colors.lightGreen.shade100,Colors.green.shade100],),
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5),),
                           ),
                           child: StreamBuilder<QuerySnapshot>(
@@ -661,11 +688,13 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           padding: EdgeInsets.only(top: 20.0),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100],),
+                            gradient: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark?
+                            LinearGradient(colors: [Colors.transparent,Colors.transparent],):
+                            LinearGradient(colors: [Colors.white30,Colors.lightGreen.shade100,Colors.green.shade100],),
                             // borderRadius: BorderRadius.only(),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -692,7 +721,9 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           padding: EdgeInsets.only(bottom: 30),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100],),
+                            gradient: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark?
+                            LinearGradient(colors: [Colors.transparent,Colors.transparent],):
+                            LinearGradient(colors: [Colors.white30,Colors.lightGreen.shade100,Colors.green.shade100],),
                             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5),),
                           ),
                           height: 350,
@@ -704,14 +735,14 @@ class _HomePageState extends State<HomePage> {
                                 return GridView.builder(
                                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                     // maxCrossAxisExtent: MediaQuery.of(context).size.width,
-                                    mainAxisSpacing:8.0,
-                                    crossAxisSpacing:8.0,
-                                    childAspectRatio:1,
-                                    crossAxisCount: 1,
+                                    // mainAxisSpacing:8.0,
+                                    // crossAxisSpacing:8.0,
+                                    // childAspectRatio:1,
+                                    crossAxisCount: 2,
                                   ),
-                                  scrollDirection: Axis.horizontal,
+                                  scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
-                                  padding: const EdgeInsets.only(right: 25.0),
+                                  // padding: const EdgeInsets.only(right: 25.0),
                                   primary: false,
                                   itemCount: snap.length,
                                   itemBuilder: (context, index) {
@@ -765,7 +796,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 //app bar
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -824,7 +855,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         //search bar
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Container(
                             // padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
@@ -844,7 +875,7 @@ class _HomePageState extends State<HomePage> {
 
                         //ushuru na ada card
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Container(
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
@@ -906,7 +937,7 @@ class _HomePageState extends State<HomePage> {
 
                         //uza kiwanja kichwa
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -929,7 +960,7 @@ class _HomePageState extends State<HomePage> {
                                 return Text('wait...');
                               }
                               return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Container(
                                   padding: EdgeInsets.all(20),
                                   decoration: BoxDecoration(
@@ -1016,7 +1047,7 @@ class _HomePageState extends State<HomePage> {
 
                         //Hospitals list title
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

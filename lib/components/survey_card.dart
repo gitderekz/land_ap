@@ -44,7 +44,7 @@ class SurveyCard extends StatelessWidget {
             children: [
               //picture
               ClipRRect(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
                   doctorImagePath,
                   height: 100,

@@ -77,10 +77,10 @@ class _ReadMoreState extends State<ReadMore> {
                 // scrollDirection: Axis.vertical,      //commented
                 children: [//picture
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
                       widget.hospitalImagePath,
-                      height: 100,
+                      height: 150,
                     ),
                   ),
                   SizedBox(height: 10,),

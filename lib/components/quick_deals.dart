@@ -66,91 +66,94 @@ class _QuickDealState extends State<QuickDeal> {
         ? Colors.green[100]
         : Colors.amber[200];//Colors.green[200];
     return
-      Padding(
-        padding: const EdgeInsets.only(left: 25.0),
-        child: Container(
-          width: 160,
-          margin: EdgeInsets.symmetric(vertical: 4),
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-              // boxShadow: [BoxShadow(color: Colors.green,offset: Offset(2, -2),blurRadius: 4)],
-              color: Theme.of(context).cardColor,//,orangeCardColor
-              // gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100]),
-              borderRadius: BorderRadius.circular(12)
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //picture
-              Container(
-                height:150,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Lottie.asset(widget.hospitalImagePath),
-                  // Image.network(
-                  //   widget.hospitalImagePath,
-                  //   height: 100,
-                  // ),
-                ),
-              ),
-              SizedBox(height: 10,),
-
-              //hospital name
-              Flexible(
-                child: Text(
-                  widget.hospitalName,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      overflow: TextOverflow.clip
+      InkWell(
+        onTap: openHospitalPage,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+          child: Container(
+            width: 80,
+            margin: EdgeInsets.symmetric(vertical: 4),
+            // padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                // boxShadow: [BoxShadow(color: Colors.green,offset: Offset(2, -2),blurRadius: 4)],
+                color: Theme.of(context).cardColor,//,orangeCardColor
+                // gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100]),
+                borderRadius: BorderRadius.circular(12)
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //picture
+                Container(
+                  height:100,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Lottie.asset(widget.hospitalImagePath),
+                    // Image.network(
+                    //   widget.hospitalImagePath,
+                    //   height: 100,
+                    // ),
                   ),
                 ),
-              ),
+                SizedBox(height: 2,),
 
-              //hospital title
-              Text(widget.hospitalLocation),
-              SizedBox(height: 10,),
-
-              //read more
-              QuickDealReadMore(
-                  hospitalImagePath: widget.hospitalImagePath,
-                  hospitalName: widget.hospitalName,
-                  hospitalLocation: widget.hospitalLocation,
-                  hospitalDescription: widget.hospitalDescription,
-                  hospitalSnapshot: widget.hospitalSnapshot,
-                  hospitalId:widget.hospitalId,
-                  receptionPhone:widget.receptionPhone,
-                  // user details
-                  userFirstName:widget.userFirstName,
-                  userLastName:widget.userLastName,
-                  userAddress:widget.userAddress,
-                  userGender:widget.userGender,
-                  userPhone:widget.userPhone,
-                  userId:widget.userId
-              ),
-              SizedBox(height: 12,),
-
-              //visit
-              InkWell(
-                onTap: openHospitalPage,
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.green[300],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.visit,
-                      style: TextStyle(color: Colors.white),
+                //hospital name
+                Flexible(
+                  child: Text(
+                    widget.hospitalName,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        overflow: TextOverflow.clip
                     ),
                   ),
                 ),
-              )
 
-            ],
+                //hospital title
+                Text(widget.hospitalLocation),
+                SizedBox(height: 2,),
+
+                //read more
+                QuickDealReadMore(
+                    hospitalImagePath: widget.hospitalImagePath,
+                    hospitalName: widget.hospitalName,
+                    hospitalLocation: widget.hospitalLocation,
+                    hospitalDescription: widget.hospitalDescription,
+                    hospitalSnapshot: widget.hospitalSnapshot,
+                    hospitalId:widget.hospitalId,
+                    receptionPhone:widget.receptionPhone,
+                    // user details
+                    userFirstName:widget.userFirstName,
+                    userLastName:widget.userLastName,
+                    userAddress:widget.userAddress,
+                    userGender:widget.userGender,
+                    userPhone:widget.userPhone,
+                    userId:widget.userId
+                ),
+                SizedBox(height: 2,),
+
+                // //visit
+                // InkWell(
+                //   onTap: openHospitalPage,
+                //   child: Container(
+                //     padding: EdgeInsets.all(12),
+                //     decoration: BoxDecoration(
+                //       color: Colors.green[300],
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //     child: Center(
+                //       child: Text(
+                //         AppLocalizations.of(context)!.visit,
+                //         style: TextStyle(color: Colors.white),
+                //       ),
+                //     ),
+                //   ),
+                // )
+
+              ],
+            ),
           ),
         ),
       );

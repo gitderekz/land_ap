@@ -21,7 +21,7 @@ class ThemeProvider extends ChangeNotifier {
   }
   // END LOCALE
 
-  ThemeMode themeMode = ThemeMode.system;
+  ThemeMode themeMode = ThemeMode.dark;//.system;
 
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
@@ -48,11 +48,14 @@ abstract class AppColors {
   static const iconDark = Color(0xFFB1B3C1);
   static const textHighlight = secondary;
   static const cardLight = Color(0xFFF9FAFE);
+  // static const cardLight = Color(0xffeeffdb);
+  // static const cardLight = Color(0xFF76FF03);
+  // static const cardLight = Color(0xFFB2FF59);
   static const cardDark = Color(0xFF303334);
 
 }
 abstract class _LightColors {
-  static Color? background = Colors.grey[300];//Colors.white;
+  static Color? background = Colors.white;//Colors.grey[300];
   static const card = AppColors.cardLight;
 }
 

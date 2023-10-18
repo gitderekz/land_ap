@@ -58,7 +58,7 @@ class _UploadPopupState extends State<UploadPopup> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      title: const Center(child: Text('Pakia taarifa za kiwanja')),
+      title: const Center(child: Text('Upload plot info')),
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,11 +90,23 @@ class _UploadPopupState extends State<UploadPopup> {
                   ),
                 )
                 :
-                const CircleAvatar(
-                      radius: 65,
-                      backgroundColor: Colors.green,
-                      backgroundImage: NetworkImage('https://cdn-icons-png.flaticon.com/128/10364/10364853.png'),//AssetImage('assets/images/location_icon.png'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Flexible(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: const Icon(Icons.photo_camera_back,size: 50,),//Image.asset(''),
+                      ),
                     ),
+                    Flexible(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: const Icon(Icons.business_sharp,size: 50,),//Image.asset(''),
+                      ),
+                    )
+                  ],
+                ),
             Center(
                   child: IconButton(
                       onPressed: selectImage,
@@ -171,14 +183,14 @@ class _UploadPopupState extends State<UploadPopup> {
                 width: 150,
                 padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.red[100],
+                  color: Colors.lime[100],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
                   child: Text(
                     'Close',
                     style: TextStyle(
-                        color: Colors.red,
+                        color: Colors.lime[600],
                         fontWeight: FontWeight.bold),
                   ),
                 ),

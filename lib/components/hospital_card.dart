@@ -100,10 +100,10 @@ class _HospitalCardState extends State<HospitalCard> {
   Widget build(BuildContext context) {
     return
       Padding(
-        padding: const EdgeInsets.only(left: 25.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Container(
           width: 160,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(12)
@@ -113,11 +113,18 @@ class _HospitalCardState extends State<HospitalCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               //picture
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.network(
-                  widget.hospitalImagePath,
-                  height: 100,
+              Container(
+                decoration: BoxDecoration(
+                color: Colors.yellow[50],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    widget.hospitalImagePath,
+                    height: 100,
+                    width: 150,
+                  ),
                 ),
               ),
               SizedBox(height: 10,),

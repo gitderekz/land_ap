@@ -30,10 +30,10 @@ class DoctorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Padding(
-        padding: const EdgeInsets.only(left: 25.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Container(
           width: 150,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(12)
@@ -43,7 +43,7 @@ class DoctorCard extends StatelessWidget {
             children: [
               //picture
               ClipRRect(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
                   doctorImagePath,
                   height: 100,

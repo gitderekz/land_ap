@@ -13,7 +13,7 @@ class ClinicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Padding(
-        padding: const EdgeInsets.only(left: 25.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
