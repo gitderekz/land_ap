@@ -15,6 +15,7 @@ import '../components/gradient_animation_welcome.dart';
 import '../components/hospital_card.dart';
 import '../components/personalize_button.dart';
 import '../components/read_more.dart';
+import '../components/upload_popup_deals.dart';
 import 'doctor_appointment.dart';
 import 'hospital_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   String nearHospitalLocation = '';
   String nearHospitalDescription = '';
   String receptionPhone = '';
+  String price = '';
   String role = 'patient';
 
   @override
@@ -169,178 +171,73 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
+                      mainAxisAlignment:MainAxisAlignment.start,
                       children: [
-                        SizedBox(height: 8.0,),
+                        // SizedBox(height: 8.0,),
 
                         //ushuru na ada card
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Container(
-                            padding: EdgeInsets.all(8.0),
+                            height: 120,
+                            width: MediaQuery.of(context).size.width,
+                            // padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
-                              boxShadow: [BoxShadow(color: Colors.green.shade400,offset: Offset(2, -2),blurRadius: 2,spreadRadius:1,blurStyle: BlurStyle.normal)],
-                              color: greenCardColor,
+                              // boxShadow: [BoxShadow(color: Colors.green.shade400,offset: Offset(2, -2),blurRadius: 2,spreadRadius:1,blurStyle: BlurStyle.normal)],
+                              // color: Theme.of(context).cardColor,//greenCardColor,
                               borderRadius: BorderRadius.circular(12),
                             ),
 
-                            child: Row(
-                              children: [
-                                //animation
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  child: Lottie.asset('assets/jsons/payment.json'),
-                                    decoration: BoxDecoration(
-                                      color: Colors.lightGreenAccent[100],
-                                      borderRadius: BorderRadius.circular(20),
-                                    )
-                                ),
-                                SizedBox(width: 20.0,),
-
-                                //tax & fee
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)!.how_do_you_feel,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      SizedBox(height: 12,),
-                                      Text(
-                                        AppLocalizations.of(context)!.how_do_you_feel_text,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      SizedBox(height: 12,),
-                                      InkWell(
-                                        onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
-                                          return PaymentsPopup(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              primary: false,
+                              itemCount: 1,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Row(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    //animation
+                                    InkWell(
+                                      onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
+                                        return PaymentsPopup(
                                             userFirstName:userFirstName,
                                             userLastName:userLastName,
                                             userAddress:userAddress,
                                             userGender:userGender,
                                             userPhone:userPhone,
-                                            userId:userId); }),
-                                        child: Container(
-                                          padding: EdgeInsets.all(12),
-                                          decoration: BoxDecoration(
-                                            color: Colors.green[300],
-                                            borderRadius: BorderRadius.circular(12),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              AppLocalizations.of(context)!.get_started,
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          ),
+                                            userId:userId); }
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.lightGreenAccent[100],
+                                          borderRadius: BorderRadius.circular(20),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 8,),
-
-                        //uza kiwanja kichwa
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.near_hospital,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 2,),
-                        //uza kiwanja card
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-
-                            child: Row(
-                              children: [
-                                //animation
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  child: Lottie.asset('assets/jsons/business.json'),
-                                    decoration: BoxDecoration(
-                                      color: Colors.lightGreenAccent[100],
-                                      borderRadius: BorderRadius.circular(20),
-                                    )
-                                  // Image.network(
-                                  //   nearHospitalImage,
-                                  //   height: 100,
-                                  // ),
-                                ),
-                                SizedBox(width: 20.0,),
-
-                                //near hospital
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      FutureBuilder(
-                                          future: _fetchUserDetails(),
-                                          builder: (context,snapshot) {
-                                            if(snapshot.connectionState != ConnectionState.done){
-                                              return Text('wait...');
-                                            }
-                                            return Text(
-                                              AppLocalizations.of(context)!.near_hospital,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                height: 80,
+                                                width: 100,
+                                                child: Lottie.asset('assets/jsons/payment.json'),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.lightGreenAccent[100],
+                                                  borderRadius: BorderRadius.circular(20),
+                                                ),
+                                            ),
+                                            Text(
+                                              AppLocalizations.of(context)!.how_do_you_feel,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 16,
+                                                fontSize: 14,
                                               ),
-                                            );
-                                          }
-                                      ),
-
-                                      SizedBox(height: 12,),
-                                      Text(
-                                        AppLocalizations.of(context)!.near_hospital_description,
-                                        style: TextStyle(
-                                          fontSize: 16,
+                                            )
+                                          ],
                                         ),
                                       ),
-                                      SizedBox(height: 12,),
-                                      ReadMore(
-                                          hospitalImagePath: nearHospitalImage,
-                                          hospitalName: AppLocalizations.of(context)!.near_hospital,
-                                          hospitalLocation: nearHospitalLocation,
-                                          hospitalDescription: AppLocalizations.of(context)!.near_hospital_description,
-                                          hospitalSnapshot: hospitalSnapshot,
-                                          hospitalId:hospitalId,
-                                          receptionPhone:receptionPhone,
-                                          // user details
-                                          userFirstName:userFirstName,
-                                          userLastName:userLastName,
-                                          userAddress:userAddress,
-                                          userGender:userGender,
-                                          userPhone:userPhone,
-                                          userId:userId
-                                      ),
-                                      SizedBox(height: 12,),
-                                      InkWell(
+                                    ),
+                                    SizedBox(width: 10.0,),
+                                    InkWell(
                                         onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
                                           return UploadPopup(
                                               userFirstName:userFirstName,
@@ -348,29 +245,336 @@ class _HomePageState extends State<HomePage> {
                                               userAddress:userAddress,
                                               userGender:userGender,
                                               userPhone:userPhone,
-                                              userId:userId); }),
-                                        child: Container(
-                                          padding: EdgeInsets.all(12),
-                                          decoration: BoxDecoration(
-                                            color: Colors.green[300],
-                                            borderRadius: BorderRadius.circular(12),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              AppLocalizations.of(context)!.visit,
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          ),
+                                              userId:userId); }
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.lightGreenAccent[100],
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            child: Column(
+                                                children: [
+                                                  Container(
+                                                      height: 80,
+                                                      width: 100,
+                                                      child: Lottie.asset('assets/jsons/business.json'),
+                                                      // decoration: BoxDecoration(
+                                                      //   color: Colors.lightGreenAccent[100],
+                                                      //   borderRadius: BorderRadius.circular(20),
+                                                      // ),
+                                                    // Image.network(
+                                                    //   nearHospitalImage,
+                                                    //   height: 100,
+                                                    // ),
+                                                  ),
+                                                  Text(
+                                                    AppLocalizations.of(context)!.near_hospital,
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 14,
+                                                    ),
+                                                  )
+                                                ]
+                                            )
+                                        )
+                                    ),
+                                    SizedBox(width: 10.0,),
+                                    InkWell(
+                                        onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
+                                          return UploadPopupDeals(
+                                              userFirstName:userFirstName,
+                                              userLastName:userLastName,
+                                              userAddress:userAddress,
+                                              userGender:userGender,
+                                              userPhone:userPhone,
+                                              userId:userId); }
+                                        ),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.lightGreenAccent[100],
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            child: Column(
+                                                children: [
+                                                  Container(
+                                                      height: 80,
+                                                      width: 100,
+                                                      child: Lottie.asset('assets/jsons/vital-signs.json'),
+                                                      // decoration: BoxDecoration(
+                                                      //   color: Colors.lightGreenAccent[100],
+                                                      //   borderRadius: BorderRadius.circular(20),
+                                                      // )
+                                                    // Image.network(
+                                                    //   nearHospitalImage,
+                                                    //   height: 100,
+                                                    // ),
+                                                  ),
+                                                  Text(
+                                                    'Upload\nDeals',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 14,
+                                                    ),
+                                                  )
+                                                ]
+                                            )
+                                        )
+                                    ),
+                                    SizedBox(width: 10.0,),
+                                    InkWell(
+                                        onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
+                                          return UploadPopup(
+                                              userFirstName:userFirstName,
+                                              userLastName:userLastName,
+                                              userAddress:userAddress,
+                                              userGender:userGender,
+                                              userPhone:userPhone,
+                                              userId:userId); }
+                                        ),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.lightGreenAccent[100],
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            child: Column(
+                                                children: [
+                                                  Container(
+                                                      height: 80,
+                                                      width: 100,
+                                                      child: Lottie.asset('assets/jsons/schedule.json'),
+                                                      // decoration: BoxDecoration(
+                                                      //   color: Colors.lightGreenAccent[100],
+                                                      //   borderRadius: BorderRadius.circular(20),
+                                                      // )
+                                                    // Image.network(
+                                                    //   nearHospitalImage,
+                                                    //   height: 100,
+                                                    // ),
+                                                  ),
+                                                  Text(
+                                                    'Register\nCompany',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 14,
+                                                    ),
+                                                  )
+                                                ]
+                                            )
+                                        )
+                                    ),
+                                    SizedBox(width: 10.0,),
+                                    InkWell(
+                                        onTap: openHospitalPage,
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.lightGreenAccent[100],
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            child: Column(
+                                                children: [
+                                                  Container(
+                                                      height: 80,
+                                                      width: 100,
+                                                      child: Lottie.asset('assets/jsons/web.json'),
+                                                      // decoration: BoxDecoration(
+                                                      //   color: Colors.lightGreenAccent[100],
+                                                      //   borderRadius: BorderRadius.circular(20),
+                                                      // )
+                                                    // Image.network(
+                                                    //   nearHospitalImage,
+                                                    //   height: 100,
+                                                    // ),
+                                                  ),
+                                                  Text(
+                                                    // AppLocalizations.of(context)!.government_site,
+                                                    'official\nsite',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 14,
+                                                    ),
+                                                  )
+                                                ]
+                                            )
+                                        )
+                                    ),
+                                    // //tax & fee
+                                    // Expanded(
+                                    //   child: Column(
+                                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                                    //     children: [
+                                    //       Text(
+                                    //         AppLocalizations.of(context)!.how_do_you_feel,
+                                    //         style: TextStyle(
+                                    //           fontWeight: FontWeight.bold,
+                                    //           fontSize: 16,
+                                    //         ),
+                                    //       ),
+                                    //       SizedBox(height: 12,),
+                                    //       Text(
+                                    //         AppLocalizations.of(context)!.how_do_you_feel_text,
+                                    //         style: TextStyle(
+                                    //           fontSize: 16,
+                                    //         ),
+                                    //       ),
+                                    //       SizedBox(height: 12,),
+                                    //       InkWell(
+                                    //         onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
+                                    //           return PaymentsPopup(
+                                    //             userFirstName:userFirstName,
+                                    //             userLastName:userLastName,
+                                    //             userAddress:userAddress,
+                                    //             userGender:userGender,
+                                    //             userPhone:userPhone,
+                                    //             userId:userId); }),
+                                    //         child: Container(
+                                    //           padding: EdgeInsets.all(12),
+                                    //           decoration: BoxDecoration(
+                                    //             color: Colors.green[300],
+                                    //             borderRadius: BorderRadius.circular(12),
+                                    //           ),
+                                    //           child: Center(
+                                    //             child: Text(
+                                    //               AppLocalizations.of(context)!.get_started,
+                                    //               style: TextStyle(color: Colors.white),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       )
+                                    //     ],
+                                    //   ),
+                                    // )
+                                  ],
+                                );
+                              }),
+                              // child:
+
+                            // ),
                           ),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 8,),
+
+                        // //uza kiwanja kichwa
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     children: [
+                        //       Text(
+                        //         AppLocalizations.of(context)!.near_hospital,
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.bold,
+                        //           fontSize: 16,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // SizedBox(height: 2,),
+                        // //uza kiwanja card
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        //   child: Container(
+                        //     padding: EdgeInsets.all(8.0),
+                        //     decoration: BoxDecoration(
+                        //       color: Theme.of(context).cardColor,
+                        //       borderRadius: BorderRadius.circular(12),
+                        //     ),
+                        //
+                        //     child: Row(
+                        //       children: [
+                        //         //animation
+                        //         Container(
+                        //           height: 100,
+                        //           width: 100,
+                        //           child: Lottie.asset('assets/jsons/business.json'),
+                        //             decoration: BoxDecoration(
+                        //               color: Colors.lightGreenAccent[100],
+                        //               borderRadius: BorderRadius.circular(20),
+                        //             )
+                        //           // Image.network(
+                        //           //   nearHospitalImage,
+                        //           //   height: 100,
+                        //           // ),
+                        //         ),
+                        //         SizedBox(width: 20.0,),
+                        //
+                        //         //near hospital
+                        //         Expanded(
+                        //           child: Column(
+                        //             crossAxisAlignment: CrossAxisAlignment.start,
+                        //             children: [
+                        //               FutureBuilder(
+                        //                   future: _fetchUserDetails(),
+                        //                   builder: (context,snapshot) {
+                        //                     if(snapshot.connectionState != ConnectionState.done){
+                        //                       return Text('wait...');
+                        //                     }
+                        //                     return Text(
+                        //                       AppLocalizations.of(context)!.near_hospital,
+                        //                       style: TextStyle(
+                        //                         fontWeight: FontWeight.bold,
+                        //                         fontSize: 16,
+                        //                       ),
+                        //                     );
+                        //                   }
+                        //               ),
+                        //
+                        //               SizedBox(height: 12,),
+                        //               Text(
+                        //                 AppLocalizations.of(context)!.near_hospital_description,
+                        //                 style: TextStyle(
+                        //                   fontSize: 16,
+                        //                 ),
+                        //               ),
+                        //               SizedBox(height: 12,),
+                        //               ReadMore(
+                        //                   hospitalImagePath: nearHospitalImage,
+                        //                   hospitalName: AppLocalizations.of(context)!.near_hospital,
+                        //                   hospitalLocation: nearHospitalLocation,
+                        //                   hospitalDescription: AppLocalizations.of(context)!.near_hospital_description,
+                        //                   hospitalSnapshot: hospitalSnapshot,
+                        //                   hospitalId:hospitalId,
+                        //                   receptionPhone:receptionPhone,
+                        //                   // user details
+                        //                   userFirstName:userFirstName,
+                        //                   userLastName:userLastName,
+                        //                   userAddress:userAddress,
+                        //                   userGender:userGender,
+                        //                   userPhone:userPhone,
+                        //                   userId:userId
+                        //               ),
+                        //               SizedBox(height: 12,),
+                        //               InkWell(
+                        //                 onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
+                        //                   return UploadPopup(
+                        //                       userFirstName:userFirstName,
+                        //                       userLastName:userLastName,
+                        //                       userAddress:userAddress,
+                        //                       userGender:userGender,
+                        //                       userPhone:userPhone,
+                        //                       userId:userId); }),
+                        //                 child: Container(
+                        //                   padding: EdgeInsets.all(12),
+                        //                   decoration: BoxDecoration(
+                        //                     color: Colors.green[300],
+                        //                     borderRadius: BorderRadius.circular(12),
+                        //                   ),
+                        //                   child: Center(
+                        //                     child: Text(
+                        //                       AppLocalizations.of(context)!.visit,
+                        //                       style: TextStyle(color: Colors.white),
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //               )
+                        //             ],
+                        //           ),
+                        //         )
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 20,),
 
                         //Hospitals list title
                         Padding(
@@ -399,7 +603,7 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 8,),
                         //Hospitals list cards
                         Container(
-                          height: 250,
+                          height: 180,
                           child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance.collection("hospitals").snapshots(),
                             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -487,121 +691,121 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(height: 20,),
 
-                        //ukurasa wa serikali kichwa
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.government_site,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 8,),
-                        //ukurasa wa serikali card
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Container(
-                            padding: EdgeInsets.all(12.0),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-
-                            child: Row(
-                              children: [
-                                //animation
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  child: Lottie.asset('assets/jsons/web.json'),
-                                    decoration: BoxDecoration(
-                                      color: Colors.lightGreenAccent[100],
-                                      borderRadius: BorderRadius.circular(20),
-                                    )
-                                  // Image.network(
-                                  //   nearHospitalImage,
-                                  //   height: 100,
-                                  // ),
-                                ),
-                                SizedBox(width: 2.0,),
-
-                                //near hospital
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      FutureBuilder(
-                                          future: _fetchUserDetails(),
-                                          builder: (context,snapshot) {
-                                            if(snapshot.connectionState != ConnectionState.done){
-                                              return Text('wait...');
-                                            }
-                                            return Text(
-                                              AppLocalizations.of(context)!.government_site,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
-                                              ),
-                                            );
-                                          }
-                                      ),
-
-                                      SizedBox(height: 12,),
-                                      Text(
-                                        AppLocalizations.of(context)!.government_site_description,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      // SizedBox(height: 12,),
-                                      // ReadMore(
-                                      //     hospitalImagePath: nearHospitalImage,
-                                      //     hospitalName: AppLocalizations.of(context)!.government_site,
-                                      //     hospitalLocation: nearHospitalLocation,
-                                      //     hospitalDescription: AppLocalizations.of(context)!.government_site_description,
-                                      //     hospitalSnapshot: hospitalSnapshot,
-                                      //     hospitalId:hospitalId,
-                                      //     receptionPhone:receptionPhone,
-                                      //     // user details
-                                      //     userFirstName:userFirstName,
-                                      //     userLastName:userLastName,
-                                      //     userAddress:userAddress,
-                                      //     userGender:userGender,
-                                      //     userPhone:userPhone,
-                                      //     userId:userId
-                                      // ),
-                                      SizedBox(height: 12,),
-                                      InkWell(
-                                        onTap: openHospitalPage,
-                                        child: Container(
-                                          padding: EdgeInsets.all(12),
-                                          decoration: BoxDecoration(
-                                            color: Colors.green[300],
-                                            borderRadius: BorderRadius.circular(12),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              AppLocalizations.of(context)!.visit,
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20,),
+                        // //ukurasa wa serikali kichwa
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     children: [
+                        //       Text(
+                        //         AppLocalizations.of(context)!.government_site,
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.bold,
+                        //           fontSize: 16,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // SizedBox(height: 8,),
+                        // //ukurasa wa serikali card
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        //   child: Container(
+                        //     padding: EdgeInsets.all(12.0),
+                        //     decoration: BoxDecoration(
+                        //       color: Theme.of(context).cardColor,
+                        //       borderRadius: BorderRadius.circular(12),
+                        //     ),
+                        //
+                        //     child: Row(
+                        //       children: [
+                        //         //animation
+                        //         Container(
+                        //           height: 100,
+                        //           width: 100,
+                        //           child: Lottie.asset('assets/jsons/web.json'),
+                        //             decoration: BoxDecoration(
+                        //               color: Colors.lightGreenAccent[100],
+                        //               borderRadius: BorderRadius.circular(20),
+                        //             )
+                        //           // Image.network(
+                        //           //   nearHospitalImage,
+                        //           //   height: 100,
+                        //           // ),
+                        //         ),
+                        //         SizedBox(width: 2.0,),
+                        //
+                        //         //near hospital
+                        //         Expanded(
+                        //           child: Column(
+                        //             crossAxisAlignment: CrossAxisAlignment.start,
+                        //             children: [
+                        //               FutureBuilder(
+                        //                   future: _fetchUserDetails(),
+                        //                   builder: (context,snapshot) {
+                        //                     if(snapshot.connectionState != ConnectionState.done){
+                        //                       return Text('wait...');
+                        //                     }
+                        //                     return Text(
+                        //                       AppLocalizations.of(context)!.government_site,
+                        //                       style: TextStyle(
+                        //                         fontWeight: FontWeight.bold,
+                        //                         fontSize: 16,
+                        //                       ),
+                        //                     );
+                        //                   }
+                        //               ),
+                        //
+                        //               SizedBox(height: 12,),
+                        //               Text(
+                        //                 AppLocalizations.of(context)!.government_site_description,
+                        //                 style: TextStyle(
+                        //                   fontSize: 16,
+                        //                 ),
+                        //               ),
+                        //               // SizedBox(height: 12,),
+                        //               // ReadMore(
+                        //               //     hospitalImagePath: nearHospitalImage,
+                        //               //     hospitalName: AppLocalizations.of(context)!.government_site,
+                        //               //     hospitalLocation: nearHospitalLocation,
+                        //               //     hospitalDescription: AppLocalizations.of(context)!.government_site_description,
+                        //               //     hospitalSnapshot: hospitalSnapshot,
+                        //               //     hospitalId:hospitalId,
+                        //               //     receptionPhone:receptionPhone,
+                        //               //     // user details
+                        //               //     userFirstName:userFirstName,
+                        //               //     userLastName:userLastName,
+                        //               //     userAddress:userAddress,
+                        //               //     userGender:userGender,
+                        //               //     userPhone:userPhone,
+                        //               //     userId:userId
+                        //               // ),
+                        //               SizedBox(height: 12,),
+                        //               InkWell(
+                        //                 onTap: openHospitalPage,
+                        //                 child: Container(
+                        //                   padding: EdgeInsets.all(12),
+                        //                   decoration: BoxDecoration(
+                        //                     color: Colors.green[300],
+                        //                     borderRadius: BorderRadius.circular(12),
+                        //                   ),
+                        //                   child: Center(
+                        //                     child: Text(
+                        //                       AppLocalizations.of(context)!.visit,
+                        //                       style: TextStyle(color: Colors.white),
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //               )
+                        //             ],
+                        //           ),
+                        //         )
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        SizedBox(height: 0,),
 
                         //nafasi za kazi kichwa
                         Container(
@@ -726,61 +930,76 @@ class _HomePageState extends State<HomePage> {
                             LinearGradient(colors: [Colors.white30,Colors.lightGreen.shade100,Colors.green.shade100],),
                             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5),),
                           ),
-                          height: 350,
-                          child: StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance.collection("hospitals").snapshots(),
-                            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if(snapshot.hasData) {
-                                final snap = snapshot.data!.docs;
-                                return GridView.builder(
-                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    // maxCrossAxisExtent: MediaQuery.of(context).size.width,
-                                    // mainAxisSpacing:8.0,
-                                    // crossAxisSpacing:8.0,
-                                    // childAspectRatio:1,
-                                    crossAxisCount: 2,
-                                  ),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  // padding: const EdgeInsets.only(right: 25.0),
-                                  primary: false,
-                                  itemCount: snap.length,
-                                  itemBuilder: (context, index) {
-                                    hospitalSnapshot = snapshot.data!;
-                                    nearHospitalName = snap[index]['name'];
-                                    nearHospitalImage = snap[index]['image'];
-                                    nearHospitalDescription = snap[index]['description'];
-                                    nearHospitalLocation = snap[index]['location'];
-                                    hospitalId = snap[index]['hospital_id'];
-                                    receptionPhone = snap[index]['reception'];
-                                    return  QuickDeal(
-                                        hospitalImagePath: (index%2==0)?'assets/jsons/real_estate.json':'assets/jsons/business.json',
-                                        hospitalName: snap[index]['name'],
-                                        hospitalLocation: snap[index]['location'],
-                                        hospitalDescription: snap[index]['description'],
-                                        hospitalSnapshot: hospitalSnapshot,
-                                        hospitalId: hospitalId,
-                                        receptionPhone: receptionPhone,
-                                        // user details
-                                        userFirstName:userFirstName,
-                                        userLastName:userLastName,
-                                        userAddress:userAddress,
-                                        userGender:userGender,
-                                        userPhone:userPhone,
-                                        userId:userId
-                                    );
-                                  },
-                                );
-                              } else {
-                                return const SizedBox();
-                              }
-                            },
+                          // height: 350,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance.collection("viwanja").snapshots(),
+                              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if(snapshot.hasData) {
+                                  final snap = snapshot.data!.docs;
+                                  return GridView.builder(
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      // maxCrossAxisExtent: MediaQuery.of(context).size.width,
+                                      // mainAxisSpacing:8.0,
+                                      // crossAxisSpacing:8.0,
+                                      // childAspectRatio:1,
+                                      crossAxisCount: 2,
+                                    ),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    // padding: const EdgeInsets.only(right: 25.0),
+                                    primary: false,
+                                    itemCount: snap.length,
+                                    itemBuilder: (context, index) {
+                                      hospitalSnapshot = snapshot.data!;
+                                      nearHospitalName = snap[index]['name'];
+                                      nearHospitalImage = snap[index]['image'][0];
+                                      nearHospitalDescription = snap[index]['bio'];
+                                      nearHospitalLocation = snap[index]['mahali'];
+                                      hospitalId = snap[index].id;//['hospital_id'];
+                                      receptionPhone = snap[index]['user_phone'];
+                                      price = snap[index]['bei'];
+                                      return  QuickDeal(
+                                          hospitalImagePath: snap[index]['image'][0],//(index%2==0)?'assets/jsons/real_estate.json':'assets/jsons/business.json',
+                                          hospitalName: snap[index]['name'],
+                                          hospitalLocation: snap[index]['mahali'],
+                                          hospitalDescription: snap[index]['bio'],
+                                          hospitalSnapshot: hospitalSnapshot,
+                                          hospitalId: hospitalId,
+                                          receptionPhone: receptionPhone,
+                                          price: price,
+                                          // user details
+                                          userFirstName:userFirstName,
+                                          userLastName:userLastName,
+                                          userAddress:userAddress,
+                                          userGender:userGender,
+                                          userPhone:userPhone,
+                                          userId:userId
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return const SizedBox();
+                                }
+                              },
+                            ),
                           ),
                         ),
 
 
                         //nafasi ya chini
-                        SizedBox(height: 100,),
+                        // SizedBox(height: 100,),
+                        Container(
+                          height: 100,
+                          // child: SizedBox(height: 100,),
+                          decoration: BoxDecoration(
+                            gradient: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark?
+                            LinearGradient(colors: [Colors.transparent,Colors.transparent],):
+                            LinearGradient(colors: [Colors.white30,Colors.lightGreen.shade100,Colors.green.shade100],),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5),),
+                          ),
+                        ),
                       ],
                     ),
                   ),

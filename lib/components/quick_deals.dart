@@ -14,6 +14,7 @@ class QuickDeal extends StatefulWidget {
   final hospitalSnapshot;
   final hospitalId;
   final receptionPhone;
+  final price;
   // user details
   final userFirstName;
   final userLastName;
@@ -31,6 +32,7 @@ class QuickDeal extends StatefulWidget {
     required this.hospitalSnapshot,
     required this.hospitalId,
     required this.receptionPhone,
+    required this.price,
     // user details
     required this.userFirstName,required this.userLastName,
     required this.userGender,required this.userPhone,
@@ -72,8 +74,8 @@ class _QuickDealState extends State<QuickDeal> {
           padding: const EdgeInsets.only(left: 8.0,right: 8.0),
           child: Container(
             width: 80,
-            margin: EdgeInsets.symmetric(vertical: 4),
-            // padding: EdgeInsets.all(20),
+            // margin: EdgeInsets.symmetric(vertical: 4),
+            padding: EdgeInsets.all(4.0),
             decoration: BoxDecoration(
                 // boxShadow: [BoxShadow(color: Colors.green,offset: Offset(2, -2),blurRadius: 4)],
                 color: Theme.of(context).cardColor,//,orangeCardColor
@@ -88,12 +90,12 @@ class _QuickDealState extends State<QuickDeal> {
                 Container(
                   height:100,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Lottie.asset(widget.hospitalImagePath),
-                    // Image.network(
-                    //   widget.hospitalImagePath,
-                    //   height: 100,
-                    // ),
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: //Lottie.asset(widget.hospitalImagePath),
+                    Image.network(
+                      widget.hospitalImagePath,
+                      height: 100,
+                    ),
                   ),
                 ),
                 SizedBox(height: 2,),
@@ -111,8 +113,11 @@ class _QuickDealState extends State<QuickDeal> {
                   ),
                 ),
 
-                //hospital title
+                //plot title
                 Text(widget.hospitalLocation),
+                SizedBox(height: 2,),
+                //plot price
+                Text(widget.price),
                 SizedBox(height: 2,),
 
                 //read more

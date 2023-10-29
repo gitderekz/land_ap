@@ -99,91 +99,94 @@ class _HospitalCardState extends State<HospitalCard> {
   @override
   Widget build(BuildContext context) {
     return
-      Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: Container(
-          width: 160,
-          padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(12)
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //picture
-              Container(
-                decoration: BoxDecoration(
-                color: Colors.yellow[50],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    widget.hospitalImagePath,
-                    height: 100,
-                    width: 150,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10,),
-
-              //hospital name
-              Flexible(
-                child: Text(
-                  widget.hospitalName,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      overflow: TextOverflow.clip
-                  ),
-                ),
-              ),
-
-              //hospital title
-              Text(widget.hospitalLocation),
-              SizedBox(height: 10,),
-
-              //read more
-              ReadMore(
-                  hospitalImagePath: widget.hospitalImagePath,
-                  hospitalName: widget.hospitalName,
-                  hospitalLocation: widget.hospitalLocation,
-                  hospitalDescription: widget.hospitalDescription,
-                  hospitalSnapshot: widget.hospitalSnapshot,
-                  hospitalId:widget.hospitalId,
-                  receptionPhone:widget.receptionPhone,
-                  // user details
-                  userFirstName:widget.userFirstName,
-                  userLastName:widget.userLastName,
-                  userAddress:widget.userAddress,
-                  userGender:widget.userGender,
-                  userPhone:widget.userPhone,
-                  userId:widget.userId
-              ),
-              SizedBox(height: 12,),
-
-              //visit
-              InkWell(
-                onTap: widget.hospitalName=='Buy Plot'?openBuyPlotPage: widget.hospitalName=='Survey Plot'?openSurveyPlot:openHospitalPage,
-                child: Container(
-                  padding: EdgeInsets.all(12),
+      InkWell(
+        onTap: widget.hospitalName=='Buy Plot'?openBuyPlotPage: widget.hospitalName=='Survey Plot'?openSurveyPlot:openHospitalPage,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Container(
+            width: 160,
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(12)
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //picture
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[300],
-                    borderRadius: BorderRadius.circular(12),
+                  color: Colors.yellow[50],
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.visit,
-                      style: TextStyle(color: Colors.white),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.network(
+                      widget.hospitalImagePath,
+                      height: 100,
+                      width: 150,
                     ),
                   ),
                 ),
-              )
+                SizedBox(height: 10,),
 
-            ],
+                //hospital name
+                Flexible(
+                  child: Text(
+                    widget.hospitalName,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        overflow: TextOverflow.clip
+                    ),
+                  ),
+                ),
+
+                // //hospital title
+                // Text(widget.hospitalLocation),
+                SizedBox(height: 10,),
+
+                //read more
+                ReadMore(
+                    hospitalImagePath: widget.hospitalImagePath,
+                    hospitalName: widget.hospitalName,
+                    hospitalLocation: widget.hospitalLocation,
+                    hospitalDescription: widget.hospitalDescription,
+                    hospitalSnapshot: widget.hospitalSnapshot,
+                    hospitalId:widget.hospitalId,
+                    receptionPhone:widget.receptionPhone,
+                    // user details
+                    userFirstName:widget.userFirstName,
+                    userLastName:widget.userLastName,
+                    userAddress:widget.userAddress,
+                    userGender:widget.userGender,
+                    userPhone:widget.userPhone,
+                    userId:widget.userId
+                ),
+                SizedBox(height: 8.0,),
+
+                // //visit
+                // InkWell(
+                //   onTap: widget.hospitalName=='Buy Plot'?openBuyPlotPage: widget.hospitalName=='Survey Plot'?openSurveyPlot:openHospitalPage,
+                //   child: Container(
+                //     padding: EdgeInsets.all(12),
+                //     decoration: BoxDecoration(
+                //       color: Colors.green[300],
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //     child: Center(
+                //       child: Text(
+                //         AppLocalizations.of(context)!.visit,
+                //         style: TextStyle(color: Colors.white),
+                //       ),
+                //     ),
+                //   ),
+                // )
+
+              ],
+            ),
           ),
         ),
       );

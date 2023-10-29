@@ -78,13 +78,11 @@ class _QuickDealReadMoreState extends State<QuickDealReadMore> {
                 // scrollDirection: Axis.vertical,      //commented
                 children: [//picture
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(8.0),
                     child:
-                    Container(height:150,child: Lottie.asset(widget.hospitalImagePath)),
-                    // Image.network(
-                    //   widget.hospitalImagePath,
-                    //   height: 100,
-                    // ),
+                    // Container(height:150,child: Lottie.asset(widget.hospitalImagePath)),
+                    Container(height:150,child: Image.network(widget.hospitalImagePath, height: 100,),),
+
                   ),
                   SizedBox(height: 10,),
 

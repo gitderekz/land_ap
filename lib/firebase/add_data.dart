@@ -38,10 +38,14 @@ class StoreData {
         List imageUrls = await uploadImageToStorage('viwanja',userId,'${Timestamp.now().toDate()}', file);
         print('PIHA ZIKO: ${imageUrls.length}');
         if(imageUrls.isNotEmpty){
-          await _firestore.collection('profiles').add({
+          await _firestore.collection('viwanja').add({
             'name': name,
             'bio': bio,
             'image': imageUrls,
+            'bei': '1000000',
+            'mahali': 'Oysterbay, Dar es salaam',
+            'latitude': '0.9',
+            'longitude': '0.9',
             'time':Timestamp.now(),
             'first_name': userLastName,
             'last_name': userLastName,
