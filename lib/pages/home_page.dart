@@ -601,7 +601,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         SizedBox(height: 8,),
-                        //Hospitals list cards
+                        //services list cards
                         Container(
                           height: 180,
                           child: StreamBuilder<QuerySnapshot>(

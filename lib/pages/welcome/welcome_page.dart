@@ -123,6 +123,31 @@ class _WelcomePageState extends State<WelcomePage> {
                             ],
                           ),
                         ),
+                        SizedBox(height: 0.0,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10.0),
+                              margin: EdgeInsets.only(right: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.0),
+                                // color: Colors.green[300]
+                              ),
+                              child: TextButton(
+                                child: Row(
+                                  children: [
+                                    Text('NEXT',style: TextStyle(color: textColor,fontSize: 20,),),
+                                    Icon(Icons.navigate_next,color: Colors.green,),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  _controller.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -148,6 +173,31 @@ class _WelcomePageState extends State<WelcomePage> {
                                 fontSize: 18,
                                 color: textColor
                             ),
+                          ),
+                          SizedBox(height: 20,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10.0),
+                                margin: EdgeInsets.only(right: 10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  // color: Colors.green[300]
+                                ),
+                                child: TextButton(
+                                  child: Row(
+                                    children: [
+                                      Text('NEXT',style: TextStyle(color: textColor,fontSize: 20,),),
+                                      Icon(Icons.navigate_next,color: Colors.green,),
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    _controller.animateToPage(3, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -189,6 +239,31 @@ class _WelcomePageState extends State<WelcomePage> {
                                 fontSize: 30,
                                 color: Colors.green[300]
                             ),
+                          ),
+                          SizedBox(height: 20,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10.0),
+                                margin: EdgeInsets.only(right: 10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  // color: Colors.green[300]
+                                ),
+                                child: TextButton(
+                                  child: Row(
+                                    children: [
+                                      Text('NEXT',style: TextStyle(color: textColor,fontSize: 20,),),
+                                      Icon(Icons.navigate_next,color: Colors.green,),
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    _controller.animateToPage(4, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
