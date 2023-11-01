@@ -9,9 +9,10 @@ import 'package:image_picker/image_picker.dart';
 // import '../firebase/add_data_categories.dart';
 // import '../firebase/add_data_bidhaa.dart';
 // import '../firebase/add_data_discounts.dart';
+import 'add_data_companies.dart';
 import 'add_data_deals.dart';
 
-class UploadPopupDeals extends StatefulWidget {
+class UploadPopupCompanies extends StatefulWidget {
   // user details
   final userFirstName;
   final userLastName;
@@ -19,13 +20,13 @@ class UploadPopupDeals extends StatefulWidget {
   final userGender;
   final userPhone;
   final userId;
-  const UploadPopupDeals({Key? key,required this.userFirstName,required this.userLastName,required this.userGender,required this.userPhone,required this.userId,required this.userAddress}) : super(key: key);
+  const UploadPopupCompanies({Key? key,required this.userFirstName,required this.userLastName,required this.userGender,required this.userPhone,required this.userId,required this.userAddress}) : super(key: key);
 
   @override
-  State<UploadPopupDeals> createState() => _UploadPopupDealsState();
+  State<UploadPopupCompanies> createState() => _UploadPopupCompaniesState();
 }
 
-class _UploadPopupDealsState extends State<UploadPopupDeals> {
+class _UploadPopupCompaniesState extends State<UploadPopupCompanies> {
   GoogleSignIn _googleSignIn = GoogleSignIn();
   List<Uint8List>? _image = [];
   final TextEditingController nameController = TextEditingController();
@@ -60,11 +61,11 @@ class _UploadPopupDealsState extends State<UploadPopupDeals> {
     });
   }
 
-  Future<String> hifadhiDeals() async{
+  Future<String> hifadhiCompanies() async{
     String name = nameController.text;
     String bio = bioController.text;
     String bei = beiController.text;
-    String message = await Deals().saveData(aina: aina, name: name, bio: bio, bei: bei, file: _image!,userFirstName: widget.userFirstName,userLastName: widget.userLastName,userPhone: widget.userPhone,userId: widget.userId,kundi: kundi,kundiDogo: kundiDogo);
+    String message = await Companies().saveData(aina: aina, name: name, bio: bio, bei: bei, file: _image!,userFirstName: widget.userFirstName,userLastName: widget.userLastName,userPhone: widget.userPhone,userId: widget.userId,kundi: kundi,kundiDogo: kundiDogo);
     return message;
   }
 
@@ -83,7 +84,7 @@ class _UploadPopupDealsState extends State<UploadPopupDeals> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      title: const Center(child: Text('Upload Quick Deals')),
+      title: const Center(child: Text('Upload Company')),
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -294,7 +295,7 @@ class _UploadPopupDealsState extends State<UploadPopupDeals> {
             // hifadhi punguzo
             InkWell(
               onTap: () async {
-                await hifadhiDeals();
+                await hifadhiCompanies();
                 closeDialog();
               },
               child: Container(

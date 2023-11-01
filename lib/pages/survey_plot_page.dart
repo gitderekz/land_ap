@@ -460,7 +460,7 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance.collection("viwanja").snapshots(),
+                stream: FirebaseFirestore.instance.collection("companies").snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if(snapshot.hasData) {
                     final snap = snapshot.data!.docs;
@@ -495,7 +495,7 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                         return DoctorCard(
                             doctorImagePath: snap[index]['image'][0],
                             doctorName: snap[index]['name'],
-                            doctorProfession: snap[index]['mahali'],
+                            doctorProfession: snap[index]['kundi'],//mahali
                             hospitalId:snap[index]['bio'],
                             hospitalSnapshot:snapshot.data!,
                             receptionPhone: snap[index]['user_phone'],

@@ -15,6 +15,7 @@ import '../components/gradient_animation_welcome.dart';
 import '../components/hospital_card.dart';
 import '../components/personalize_button.dart';
 import '../components/read_more.dart';
+import '../components/upload_popup_companies.dart';
 import '../components/upload_popup_deals.dart';
 import 'doctor_appointment.dart';
 import 'hospital_page.dart';
@@ -87,7 +88,7 @@ class _HomePageState extends State<HomePage> {
       future: _fetchUserDetails(),
       builder: (context,snapshot){
         if(snapshot.connectionState != ConnectionState.done){
-          return Center(child: Lottie.asset('assets/jsons/loading.json'));
+          return Center(child: Lottie.asset('assets/jsons/pakia_c.json'));
         }
         return role=='patient'?
         Scaffold(
@@ -323,7 +324,7 @@ class _HomePageState extends State<HomePage> {
                                     SizedBox(width: 10.0,),
                                     InkWell(
                                         onTap: ()=>showDialog(context: context, builder: (BuildContext context) {
-                                          return UploadPopup(
+                                          return UploadPopupCompanies(
                                               userFirstName:userFirstName,
                                               userLastName:userLastName,
                                               userAddress:userAddress,
@@ -934,7 +935,7 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: StreamBuilder<QuerySnapshot>(
-                              stream: FirebaseFirestore.instance.collection("viwanja").snapshots(),
+                              stream: FirebaseFirestore.instance.collection("trending").snapshots(),
                               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                                 if(snapshot.hasData) {
                                   final snap = snapshot.data!.docs;
@@ -956,14 +957,14 @@ class _HomePageState extends State<HomePage> {
                                       nearHospitalName = snap[index]['name'];
                                       nearHospitalImage = snap[index]['image'][0];
                                       nearHospitalDescription = snap[index]['bio'];
-                                      nearHospitalLocation = snap[index]['mahali'];
+                                      nearHospitalLocation = snap[index]['kundi'];//mahali
                                       hospitalId = snap[index].id;//['hospital_id'];
                                       receptionPhone = snap[index]['user_phone'];
                                       price = snap[index]['bei'];
                                       return  QuickDeal(
                                           hospitalImagePath: snap[index]['image'][0],//(index%2==0)?'assets/jsons/real_estate.json':'assets/jsons/business.json',
                                           hospitalName: snap[index]['name'],
-                                          hospitalLocation: snap[index]['mahali'],
+                                          hospitalLocation: snap[index]['kundi'],//mahali
                                           hospitalDescription: snap[index]['bio'],
                                           hospitalSnapshot: hospitalSnapshot,
                                           hospitalId: hospitalId,

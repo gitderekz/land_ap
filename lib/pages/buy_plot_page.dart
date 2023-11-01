@@ -38,6 +38,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
   String matumizi = '-Matumizi';
   List orodhaMatumizi = ['-Matumizi','Ujenzi','Shamba','Biashara','Michezo','Starehe',];
 
+  var query = FirebaseFirestore.instance.collection("viwanja");
+
   DocumentReference<Map<String, dynamic>> getUser(){
     final userDoc = FirebaseFirestore.instance.collection('users').doc(user.uid);
     return userDoc;
@@ -448,7 +450,14 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance.collection("viwanja").snapshots(),
+                stream: nchi!='-Nchi'?
+                    query
+                    .where('mahali', isEqualTo:
+                      // 'Tegeta, Dar es salaam'
+                      'Kigamboni'
+                    )
+                    .snapshots()
+                    :query.snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if(snapshot.hasData) {
                     final snap = snapshot.data!.docs;

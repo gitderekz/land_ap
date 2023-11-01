@@ -7,9 +7,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 final FirebaseStorage _storage = FirebaseStorage.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-class Deals {
+class Companies {
   Future<List> uploadImageToStorage(String parentName,String uid,String muda,List<Uint8List> file) async {
-    Reference ref = _storage.ref().child('trending').child(uid).child(muda);
+    Reference ref = _storage.ref().child(parentName).child(uid).child(muda);
     var index = 1, downloadUrl = [];
     for(var kiwanja in file){
       UploadTask uploadTask = ref.child('$index').putData(kiwanja);
@@ -41,7 +41,7 @@ class Deals {
       if(name.isNotEmpty || bio.isNotEmpty) {
         List imageUrls = await uploadImageToStorage(aina,userId,'${Timestamp.now().toDate()}', file);
         if(imageUrls.isNotEmpty){
-          await _firestore.collection('trending').doc('${Timestamp.now().toDate()}')/*.collection(kundi).doc(kundiDogo).collection(userId).doc('${Timestamp.now().toDate()}')*/
+          await _firestore.collection('companies').doc('${Timestamp.now().toDate()}')/*.collection(kundi).doc(kundiDogo).collection(userId).doc('${Timestamp.now().toDate()}')*/
               .set({
             'name': name,
             'kundi':kundi,

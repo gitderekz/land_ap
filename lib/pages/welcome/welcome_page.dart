@@ -72,7 +72,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'current ${mode}',
+                                      '${mode}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18,
@@ -142,7 +142,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   ],
                                 ),
                                 onPressed: () {
-                                  _controller.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
+                                  _controller.animateToPage(1, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
                                 },
                               ),
                             ),
@@ -159,7 +159,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         children: [
                           Lottie.asset('assets/jsons/business.json'),
                           Text(
-                            'Hello,',
+                            'Welcome to',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -167,7 +167,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             ),
                           ),
                           Text(
-                            'Welcome',
+                            'Land Ap',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -193,7 +193,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    _controller.animateToPage(3, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
+                                    _controller.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
                                   },
                                 ),
                               ),
@@ -211,15 +211,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         children: [
                           Lottie.asset('assets/jsons/real_estate.json'),
                           Text(
-                            'This is Land Ap',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: textColor
-                            ),
-                          ),
-                          Text(
-                            'Our app is dedicated to \nsimplify land services',
+                            'This app is dedicated to \nsimplify land services',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -259,7 +251,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    _controller.animateToPage(4, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
+                                    _controller.animateToPage(3, duration: Duration(milliseconds: 500), curve: Curves.bounceInOut);
                                   },
                                 ),
                               ),
