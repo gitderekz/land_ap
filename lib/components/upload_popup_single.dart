@@ -58,7 +58,7 @@ class _UploadPopupSingleState extends State<UploadPopupSingle> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      title: const Center(child: Text('Pakia taarifa za kiwanja')),
+      title: const Center(child: Text('Upload Profile')),
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

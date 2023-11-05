@@ -24,31 +24,35 @@ class Companies {
   }
 
   Future<String> saveData({
-    required String aina,
     required String name,
     required String bio,
     required String bei,
+    required String nchi,
+    required String mkoa,
+    required String wilaya,
+    required String matumizi,
     required List<Uint8List> file,
     required String userFirstName,
     required String userLastName,
     required String userPhone,
     required String userId,
-    required String kundi,
-    required String kundiDogo,
   }) async {
     String message = " Some Error Occurred";
     try{
       if(name.isNotEmpty || bio.isNotEmpty) {
-        List imageUrls = await uploadImageToStorage(aina,userId,'${Timestamp.now().toDate()}', file);
+        List imageUrls = await uploadImageToStorage('companies',userId,'${Timestamp.now().toDate()}', file);
         if(imageUrls.isNotEmpty){
           await _firestore.collection('companies').doc('${Timestamp.now().toDate()}')/*.collection(kundi).doc(kundiDogo).collection(userId).doc('${Timestamp.now().toDate()}')*/
               .set({
             'name': name,
-            'kundi':kundi,
-            'kundiDogo': kundiDogo,
             'bio': bio,
             'bei': bei,
             'image': imageUrls,
+            'nchi': nchi,
+            'mkoa': mkoa,
+            'wilaya': wilaya,
+            'matumizi': matumizi,
+            'mahali': '$wilaya, $mkoa',
             'time':Timestamp.now(),
             'first_name': userLastName,
             'last_name': userLastName,

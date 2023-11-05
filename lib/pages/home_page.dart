@@ -957,14 +957,14 @@ class _HomePageState extends State<HomePage> {
                                       nearHospitalName = snap[index]['name'];
                                       nearHospitalImage = snap[index]['image'][0];
                                       nearHospitalDescription = snap[index]['bio'];
-                                      nearHospitalLocation = snap[index]['kundi'];//mahali
+                                      nearHospitalLocation = snap[index]['mahali'];
                                       hospitalId = snap[index].id;//['hospital_id'];
                                       receptionPhone = snap[index]['user_phone'];
                                       price = snap[index]['bei'];
                                       return  QuickDeal(
                                           hospitalImagePath: snap[index]['image'][0],//(index%2==0)?'assets/jsons/real_estate.json':'assets/jsons/business.json',
                                           hospitalName: snap[index]['name'],
-                                          hospitalLocation: snap[index]['kundi'],//mahali
+                                          hospitalLocation: snap[index]['mahali'],
                                           hospitalDescription: snap[index]['bio'],
                                           hospitalSnapshot: hospitalSnapshot,
                                           hospitalId: hospitalId,

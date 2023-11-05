@@ -25,7 +25,12 @@ class StoreData {
 
   Future<String> saveData({
     required String name,
+    required String bei,
     required String bio,
+    required String nchi,
+    required String mkoa,
+    required String wilaya,
+    required String matumizi,
     required List<Uint8List> file,
     required String userFirstName,
     required String userLastName,
@@ -41,9 +46,13 @@ class StoreData {
           await _firestore.collection('viwanja').add({
             'name': name,
             'bio': bio,
+            'nchi': nchi,
+            'mkoa': mkoa,
+            'wilaya': wilaya,
+            'matumizi': matumizi,
             'image': imageUrls,
-            'bei': '1000000',
-            'mahali': 'Oysterbay, Dar es salaam',
+            'bei': bei,
+            'mahali': '$wilaya, $mkoa',
             'latitude': '0.9',
             'longitude': '0.9',
             'time':Timestamp.now(),

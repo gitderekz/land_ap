@@ -38,6 +38,9 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
   String matumizi = '-Matumizi';
   List orodhaMatumizi = ['-Matumizi','Ujenzi','Shamba','Biashara','Michezo','Starehe',];
 
+  var query = FirebaseFirestore.instance.collection("companies");//FirebaseFirestore.instance.collection("viwanja");
+
+
   DocumentReference<Map<String, dynamic>> getUser(){
     final userDoc = FirebaseFirestore.instance.collection('users').doc(user.uid);
     return userDoc;
@@ -460,7 +463,22 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance.collection("companies").snapshots(),
+                stream:
+                        nchi!='-Nchi'&&mkoa!='-Mkoa'&&wilaya!='-Wilaya'&&matumizi!='-Matumizi'? query.where('nchi', isEqualTo: '$nchi').where('mkoa', isEqualTo: '$mkoa').where('wilaya', isEqualTo: '$wilaya').where('matumizi', isEqualTo: '$matumizi').snapshots():
+                        nchi!='-Nchi'&&mkoa!='-Mkoa'&&wilaya!='-Wilaya'? query.where('nchi', isEqualTo: '$nchi').where('mkoa', isEqualTo: '$mkoa').where('wilaya', isEqualTo: '$wilaya').snapshots():
+                        nchi!='-Nchi'&&mkoa!='-Mkoa'&&matumizi!='-Matumizi'? query.where('nchi', isEqualTo: '$nchi').where('mkoa', isEqualTo: '$mkoa').where('matumizi', isEqualTo: '$matumizi').snapshots():
+                        mkoa!='-Mkoa'&&wilaya!='-Wilaya'&&matumizi!='-Matumizi'? query.where('mkoa', isEqualTo: '$mkoa').where('wilaya', isEqualTo: '$wilaya').where('matumizi', isEqualTo: '$matumizi').snapshots():
+                        nchi!='-Nchi'&&mkoa!='-Mkoa'? query.where('nchi', isEqualTo: '$nchi').where('mkoa', isEqualTo: '$mkoa').snapshots():
+                        nchi!='-Nchi'&&wilaya!='-Wilaya'? query.where('nchi', isEqualTo: '$nchi').where('wilaya', isEqualTo: '$wilaya').snapshots():
+                        nchi!='-Nchi'&&matumizi!='-Matumizi'? query.where('nchi', isEqualTo: '$nchi').where('matumizi', isEqualTo: '$matumizi').snapshots():
+                        mkoa!='-Mkoa'&&wilaya!='-Wilaya'? query.where('mkoa', isEqualTo: '$mkoa').where('wilaya', isEqualTo: '$wilaya').snapshots():
+                        mkoa!='-Mkoa'&&matumizi!='-Matumizi'? query.where('mkoa', isEqualTo: '$mkoa').where('matumizi', isEqualTo: '$matumizi').snapshots():
+                        wilaya!='-Wilaya'&&matumizi!='-Matumizi'? query.where('wilaya', isEqualTo: '$wilaya').where('matumizi', isEqualTo: '$matumizi').snapshots():
+                        nchi!='-Nchi'? query.where('nchi', isEqualTo: '$nchi').snapshots():
+                        mkoa!='-Mkoa'? query.where('mkoa', isEqualTo: '$mkoa').snapshots():
+                        wilaya!='-Wilaya'? query.where('wilaya', isEqualTo: '$wilaya').snapshots():
+                        matumizi!='-Matumizi'? query.where('matumizi', isEqualTo: '$matumizi').snapshots()
+                        :query.snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if(snapshot.hasData) {
                     final snap = snapshot.data!.docs;
@@ -495,7 +513,7 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                         return DoctorCard(
                             doctorImagePath: snap[index]['image'][0],
                             doctorName: snap[index]['name'],
-                            doctorProfession: snap[index]['kundi'],//mahali
+                            doctorProfession: snap[index]['mahali'],//mahali
                             hospitalId:snap[index]['bio'],
                             hospitalSnapshot:snapshot.data!,
                             receptionPhone: snap[index]['user_phone'],
