@@ -80,9 +80,12 @@ class _HomePageState extends State<HomePage> {
     final orangeCardColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
         ? Colors.deepOrange[200]
         : Colors.deepOrange[100];
+    // final greenCardColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+    //     ? Colors.green[200]
+    //     : Colors.green[100];
     final greenCardColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-        ? Colors.green[200]
-        : Colors.green[100];
+        ? Theme.of(context).cardColor
+        : Colors.lightGreenAccent[100];
 
     return FutureBuilder(
       future: _fetchUserDetails(),
@@ -124,8 +127,6 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(width: 8.0,),
                             ]
                         ),
-
-                        //profile
 
                         //search bar
                         Flexible(
@@ -212,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color: Colors.lightGreenAccent[100],
+                                          color: greenCardColor,
                                           borderRadius: BorderRadius.circular(20),
                                         ),
                                         child: Column(
@@ -250,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Container(
                                             decoration: BoxDecoration(
-                                              color: Colors.lightGreenAccent[100],
+                                              color: greenCardColor,
                                               borderRadius: BorderRadius.circular(20),
                                             ),
                                             child: Column(
@@ -259,10 +260,10 @@ class _HomePageState extends State<HomePage> {
                                                       height: 80,
                                                       width: 100,
                                                       child: Lottie.asset('assets/jsons/business.json'),
-                                                      // decoration: BoxDecoration(
-                                                      //   color: Colors.lightGreenAccent[100],
-                                                      //   borderRadius: BorderRadius.circular(20),
-                                                      // ),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.lightGreenAccent[100],
+                                                        borderRadius: BorderRadius.circular(20),
+                                                      ),
                                                     // Image.network(
                                                     //   nearHospitalImage,
                                                     //   height: 100,
@@ -292,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Container(
                                             decoration: BoxDecoration(
-                                              color: Colors.lightGreenAccent[100],
+                                              color: greenCardColor,
                                               borderRadius: BorderRadius.circular(20),
                                             ),
                                             child: Column(
@@ -301,10 +302,10 @@ class _HomePageState extends State<HomePage> {
                                                       height: 80,
                                                       width: 100,
                                                       child: Lottie.asset('assets/jsons/vital-signs.json'),
-                                                      // decoration: BoxDecoration(
-                                                      //   color: Colors.lightGreenAccent[100],
-                                                      //   borderRadius: BorderRadius.circular(20),
-                                                      // )
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.lightGreenAccent[100],
+                                                        borderRadius: BorderRadius.circular(20),
+                                                      )
                                                     // Image.network(
                                                     //   nearHospitalImage,
                                                     //   height: 100,
@@ -334,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Container(
                                             decoration: BoxDecoration(
-                                              color: Colors.lightGreenAccent[100],
+                                              color: greenCardColor,
                                               borderRadius: BorderRadius.circular(20),
                                             ),
                                             child: Column(
@@ -343,10 +344,10 @@ class _HomePageState extends State<HomePage> {
                                                       height: 80,
                                                       width: 100,
                                                       child: Lottie.asset('assets/jsons/schedule.json'),
-                                                      // decoration: BoxDecoration(
-                                                      //   color: Colors.lightGreenAccent[100],
-                                                      //   borderRadius: BorderRadius.circular(20),
-                                                      // )
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.lightGreenAccent[100],
+                                                        borderRadius: BorderRadius.circular(20),
+                                                      )
                                                     // Image.network(
                                                     //   nearHospitalImage,
                                                     //   height: 100,
@@ -368,7 +369,7 @@ class _HomePageState extends State<HomePage> {
                                         onTap: openHospitalPage,
                                         child: Container(
                                             decoration: BoxDecoration(
-                                              color: Colors.lightGreenAccent[100],
+                                              color: greenCardColor,
                                               borderRadius: BorderRadius.circular(20),
                                             ),
                                             child: Column(
@@ -377,10 +378,10 @@ class _HomePageState extends State<HomePage> {
                                                       height: 80,
                                                       width: 100,
                                                       child: Lottie.asset('assets/jsons/web.json'),
-                                                      // decoration: BoxDecoration(
-                                                      //   color: Colors.lightGreenAccent[100],
-                                                      //   borderRadius: BorderRadius.circular(20),
-                                                      // )
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.lightGreenAccent[100],
+                                                        borderRadius: BorderRadius.circular(20),
+                                                      )
                                                     // Image.network(
                                                     //   nearHospitalImage,
                                                     //   height: 100,

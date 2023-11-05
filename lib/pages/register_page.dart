@@ -309,14 +309,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Doctors only',
+                          'Sellers only',
                           style: TextStyle(color: Colors.grey[700]),
                         ),
                         const SizedBox(width: 4),
                         GestureDetector(
                           onTap: doctorRegisterPage,
                           child: Text(
-                            'Doctor Register here',
+                            'Sellers Register here',
                             style: TextStyle(
                               color: Colors.green[600],
                               fontWeight: FontWeight.bold,
@@ -366,7 +366,18 @@ class _RegisterPageState extends State<RegisterPage> {
                     // google button
                     InkWell(
                       onTap:  (){signUserUp(true);},
-                      child: SquareTile(imagePath: 'assets/images/google.png'),
+                      child: Column(
+                        children: [
+                          SquareTile(imagePath: 'assets/images/google.png'),
+                          Text(
+                            'Finishing Register With Gmail',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
 
                     // SizedBox(width: 25),

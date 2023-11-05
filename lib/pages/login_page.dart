@@ -114,7 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50),
 
                 // logo
-                Lottie.asset('assets/jsons/heartbeat-love.json'),
+                // Lottie.asset('assets/jsons/heartbeat-love.json'),
+                Image.asset('assets/icons/logo.ico',width: 100,height: 100,),
 
                 const SizedBox(height: 50),
 
@@ -143,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
-                          'continue with',
+                          'continue with gmail',
                           style: TextStyle(color: Colors.grey[700]),
                         ),
                       ),
@@ -166,7 +167,18 @@ class _LoginPageState extends State<LoginPage> {
                     // google button
                     InkWell(
                       onTap: (){type = true;signUserIn(type);},
-                      child: SquareTile(imagePath: 'assets/images/google.png')
+                      child: Column(
+                        children: [
+                          SquareTile(imagePath: 'assets/images/google.png'),
+                          Text(
+                            'Login With Gmail',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      )
                     ),
 
                     // SizedBox(width: 25),

@@ -80,9 +80,9 @@ class _OptionsPopupState extends State<OptionsPopup> {
 
             //logout
             InkWell(
-              onTap: (){
+              onTap: () async {
                 // Navigator.pop(context);
-                signUserOut();
+                await signUserOut();
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AuthPage()));
               },
               child: Container(

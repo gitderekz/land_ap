@@ -53,7 +53,7 @@ class _DoctorRegisterPageState extends State<DoctorRegisterPage> {
 
         MyTextField(
           controller: doctorNumberController,
-          hintText: 'Doctor\'s number',
+          hintText: 'Seller\'s number',
           obscureText: false,
         ),
         SizedBox(height: 8.0,),
@@ -63,7 +63,7 @@ class _DoctorRegisterPageState extends State<DoctorRegisterPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Not a doctor',
+              'Not a seller',
               style: TextStyle(color: Colors.grey[700]),
             ),
             const SizedBox(width: 4),
@@ -126,7 +126,18 @@ class _DoctorRegisterPageState extends State<DoctorRegisterPage> {
                 )));
                 // signUserUp(true);
                 },
-              child: SquareTile(imagePath: 'assets/images/google.png'),
+              child: Column(
+                children: [
+                  SquareTile(imagePath: 'assets/images/google.png'),
+                  Text(
+                    'Finishing Register With Gmail',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
 
             // SizedBox(width: 25),
