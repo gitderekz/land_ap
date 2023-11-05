@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:health_ai_test/components/doctor_card.dart';
+import 'package:health_ai_test/provider/theme_provider.dart';
+import 'package:provider/provider.dart';
 import '../components/options_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -68,6 +70,9 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
 
   @override
   Widget build(BuildContext context) {
+    final greenCardColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+        ? Theme.of(context).cardColor
+        : Colors.green[100];
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -314,7 +319,7 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(color: Theme.of(context).cardColor,width: 1),
-                            color: Color(0xFFC8E6C9),
+                            color: greenCardColor,
                         ),
                         child: Container(
                           width: 120,
@@ -347,7 +352,7 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(color: Theme.of(context).cardColor,width: 1),
-                          color: Color(0xFFC8E6C9),
+                          color: greenCardColor,
                         ),
                         child: Container(
                           width: 120,
@@ -380,7 +385,7 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(color: Theme.of(context).cardColor,width: 1),
-                          color: Color(0xFFC8E6C9),
+                          color: greenCardColor,
                         ),
                         child: Container(
                           width: 120,
@@ -418,7 +423,7 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(color: Theme.of(context).cardColor,width: 1),
-                          color: Color(0xFFC8E6C9),
+                          color: greenCardColor,
                         ),
                         child: Container(
                           width: 120,
