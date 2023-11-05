@@ -1,12 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:health_ai_test/components/make_call.dart';
 import 'package:health_ai_test/components/read_more.dart';
+import 'package:health_ai_test/firebase/hifadhi_shughuli.dart';
+import '../pages/buy_plot_page.dart';
+import '../pages/hospital_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../firebase/hifadhi_shughuli.dart';
-import 'kurasa_ya_chini.dart';
-import 'make_call.dart';
+import '../pages/survey_plot_page.dart';
 
-class DoctorCard extends StatefulWidget {
+class KurasaYaChini extends StatefulWidget {
   final kiwanjaImagePath;
   final kiwanjaName;
   final kiwanjaMahali;
@@ -24,7 +27,7 @@ class DoctorCard extends StatefulWidget {
   final userPhone;
   final userId;
 
-  const DoctorCard({
+  const KurasaYaChini({
     Key? key,
     required this.kiwanjaImagePath,
     required this.kiwanjaName,
@@ -35,22 +38,121 @@ class DoctorCard extends StatefulWidget {
     required this.kiwanjaBei,
     required this.kiwanjaSnapshot,
     required this.receptionPhone,
-    required this.userFirstName,required this.userLastName,required this.userAddress,required this.userGender,required this.userPhone,required this.userId,
+    // user details
+    required this.userFirstName,required this.userLastName,
+    required this.userGender,required this.userPhone,
+    required this.userId,required this.userAddress,
   }) : super(key: key);
 
   @override
-  State<DoctorCard> createState() => _DoctorCardState();
+  State<KurasaYaChini> createState() => _KurasaYaChiniState();
 }
 
-class _DoctorCardState extends State<DoctorCard> {
+class _KurasaYaChiniState extends State<KurasaYaChini> {
+  // void openHospitalPage(){
+  //   Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalPage(
+  //       hospitalName:widget.hospitalName,
+  //       hospitalImage:widget.hospitalImagePath,
+  //       hospitalLocation:widget.hospitalLocation,
+  //       hospitalDescription:widget.hospitalDescription,
+  //       hospitalSnapshot:widget.hospitalSnapshot,
+  //       hospitalId:widget.hospitalId,
+  //       receptionPhone: widget.receptionPhone,
+  //       // user details
+  //       userFirstName:widget.userFirstName,
+  //       userLastName:widget.userLastName,
+  //       userAddress:widget.userAddress,
+  //       userGender:widget.userGender,
+  //       userPhone:widget.userPhone,
+  //       userId:widget.userId
+  //   )));
+  // }
+  // void openBuyPlotPage(){
+  //   Navigator.push(context, MaterialPageRoute(builder: (context)=>BuyPlotPage(
+  //       hospitalName:widget.hospitalName,
+  //       hospitalImage:widget.hospitalImagePath,
+  //       bei:widget.bei,
+  //       hospitalLocation:widget.hospitalLocation,
+  //       hospitalDescription:widget.hospitalDescription,
+  //       hospitalSnapshot:widget.hospitalSnapshot,
+  //       hospitalId:widget.hospitalId,
+  //       receptionPhone: widget.receptionPhone,
+  //       // user details
+  //       userFirstName:widget.userFirstName,
+  //       userLastName:widget.userLastName,
+  //       userAddress:widget.userAddress,
+  //       userGender:widget.userGender,
+  //       userPhone:widget.userPhone,
+  //       userId:widget.userId
+  //   )));
+  // }
+  // void openSurveyPlot(){
+  //   Navigator.push(context, MaterialPageRoute(builder: (context)=>SurveyPlotPage(
+  //       hospitalName:widget.hospitalName,
+  //       hospitalImage:widget.hospitalImagePath,
+  //       hospitalLocation:widget.hospitalLocation,
+  //       hospitalDescription:widget.hospitalDescription,
+  //       hospitalSnapshot:widget.hospitalSnapshot,
+  //       hospitalId:widget.hospitalId,
+  //       receptionPhone: widget.receptionPhone,
+  //       // user details
+  //       userFirstName:widget.userFirstName,
+  //       userLastName:widget.userLastName,
+  //       userAddress:widget.userAddress,
+  //       userGender:widget.userGender,
+  //       userPhone:widget.userPhone,
+  //       userId:widget.userId
+  //   )));
+  // }
   Color rangiToroli = Colors.white;
   Color rangiPenda = Colors.white;
   List<bool> badiliRangi = [false,false];
   bool maongezi = false,lipa = false;
   var safu_njia = [];
   var kilicho_pendwa = '';
-  
-  
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // safu_njia = widget.bidhaaSnapshotNjia.split('/');
+    // FirebaseFirestore.instance.collection(widget.bidhaaSnapshotNjia.split('/')[0]).
+    // doc(widget.bidhaaSnapshotNjia.split('/')[1]).collection(widget.bidhaaSnapshotNjia.split('/')[2]).
+    // doc(widget.bidhaaSnapshotNjia.split('/')[3]).collection(widget.bidhaaSnapshotNjia.split('/')[4]).
+    // doc(widget.bidhaaSnapshotNjia.split('/')[5]).get().then((value) {
+    //   print(value.get('time').toString());
+    //   kilicho_pendwa = value.get('bio').toString();
+    // });
+    //
+    // try {
+    //   FirebaseFirestore.instance.collection('shughuli').doc(widget.userId).collection('toroli').
+    //   doc(widget.bidhaaSnapshotNjia.split('/')[5]).get().then((value) {
+    //     if (value.exists) {
+    //       if(widget.bidhaaSnapshotNjia == value.get('njia')){
+    //         setState(() {
+    //           badiliRangi[0] = !badiliRangi[0];
+    //           rangiToroli = Colors.deepOrangeAccent.shade700;
+    //         });
+    //       }
+    //     }
+    //   });
+    //   FirebaseFirestore.instance.collection('shughuli').doc(widget.userId).collection('penda').
+    //   doc(widget.bidhaaSnapshotNjia.split('/')[5]).get().then((value) {
+    //     if (value.exists) {
+    //       if(widget.bidhaaSnapshotNjia == value.get('njia')){
+    //         setState(() {
+    //           badiliRangi[1] = !badiliRangi[1];
+    //           rangiPenda = Colors.deepOrangeAccent.shade700;
+    //         });
+    //       }
+    //     }
+    //   });
+    // } on Exception catch (e) {
+    //   print(e.toString());
+    // }
+  }
+
   matukioKurasaYaChini(dhumuni,bidhaaId) async {
     if(dhumuni == 'maongezi'){
       setState(() {
@@ -88,137 +190,17 @@ class _DoctorCardState extends State<DoctorCard> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      InkWell(
-        onTap: ()=>showModalBottomSheet(
-            isScrollControlled:true,
-            constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height*(3/4)),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(25.0)
-                )
-            ),
-            context: context,
-            // builder: (context)=>readMore(context)
-            builder: (context)=>KurasaYaChini(
-                kiwanjaImagePath: widget.kiwanjaImagePath,
-                kiwanjaName: widget.kiwanjaName,
-                kiwanjaMahali: widget.kiwanjaMahali,
-                kiwanjaId:widget.kiwanjaId,
-                kiwanjaNjia:widget.kiwanjaNjia,
-                kiwanjaBio:widget.kiwanjaBio,
-                kiwanjaBei:widget.kiwanjaBei,
-                kiwanjaSnapshot:widget.kiwanjaSnapshot,
-                receptionPhone: widget.receptionPhone,
-                // user details
-                userFirstName:widget.userFirstName,
-                userLastName:widget.userLastName,
-                userAddress:widget.userAddress,
-                userGender:widget.userGender,
-                userPhone:widget.userPhone,
-                userId:widget.userId
-          )
-        ),
-        child: Padding(
-          padding: EdgeInsets.zero,
-          child: Container(
-            width: 150,
-            padding: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(12)
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                //picture
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    widget.kiwanjaImagePath[0],
-                    height: 100,
-                  ),
-                ),
-                SizedBox(height: 0.0,),
-
-                //rating
-                // Row(
-                //   children: [
-                //     Icon(
-                //       Icons.star,
-                //       color: Colors.yellow[600],
-                //     ),
-                //     Text(
-                //       doctorRate,
-                //       style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: 10,),
-
-                //doctor name
-                Text(
-                  widget.kiwanjaName,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    overflow: TextOverflow.clip
-                  ),
-                ),
-
-                //doctor title
-                Text(widget.kiwanjaMahali,overflow: TextOverflow.ellipsis,),
-                SizedBox(height: 10,),
-
-                //read more
-                // ReadMore(
-                //   hospitalImagePath: kiwanjaImagePath,
-                //   hospitalName: kiwanjaName,
-                //   hospitalLocation: kiwanjaId,
-                //   hospitalDescription: kiwanjaMahali,
-                //   kiwanjaSnapshot: kiwanjaSnapshot,
-                //   kiwanjaId:kiwanjaId,
-                //   receptionPhone:receptionPhone,
-                //     // user details
-                //     userFirstName:userFirstName,
-                //     userLastName:userLastName,
-                //     userAddress:userAddress,
-                //     userGender:userGender,
-                //     userPhone:userPhone,
-                //     userId:userId
-                // ),
-              ],
-            ),
-          ),
-        ),
-      );
-  }
-
-  //bottom sheet
-  Widget readMore(context){
     return Container(
-      padding: EdgeInsets.all(25.0),
+      padding: EdgeInsets.all(18.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            // height: 200,                             //commented
-            child: Padding(                             //added
+            child: Padding(
               padding: const EdgeInsets.all(0.0),
-              child: Column(                            //ListView -> Column
-                // scrollDirection: Axis.vertical,      //commented
+              child: Column(
                 children: [
-                  // //picture
-                  // ClipRRect(
-                  //   borderRadius: BorderRadius.circular(8.0),
-                  //   child: Image.network(
-                  //     widget.kiwanjaImagePath[0],
-                  //     height: 150,
-                  //   ),
-                  // ),
-
+                  //picture
                   SizedBox(
                     height: 150,
                     width: MediaQuery.of(context).size.width,
@@ -262,7 +244,7 @@ class _DoctorCardState extends State<DoctorCard> {
                   ):SizedBox(height: 0,),
 
                   //hospital location
-                  !maongezi&&!lipa?Text(widget.kiwanjaId):SizedBox(height: 0,),
+                  !maongezi&&!lipa?Text(widget.kiwanjaMahali):SizedBox(height: 0,),
 
                   //bidhaa bei
                   !maongezi&&!lipa?Text(widget.kiwanjaBei):SizedBox(height: 0),
@@ -274,7 +256,7 @@ class _DoctorCardState extends State<DoctorCard> {
                     children: [
                       Expanded(
                         child: Text(
-                          widget.kiwanjaMahali,
+                          widget.kiwanjaBio,
                           overflow: TextOverflow.visible,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -403,6 +385,7 @@ class _DoctorCardState extends State<DoctorCard> {
               ),
             ),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -486,7 +469,6 @@ class _DoctorCardState extends State<DoctorCard> {
               ),
             ],
           ),
-
         ],
       ),
     );

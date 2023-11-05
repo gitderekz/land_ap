@@ -313,7 +313,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         margin: const EdgeInsets.all(1.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                            color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -345,7 +346,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         margin: const EdgeInsets.all(1.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                          color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -377,7 +379,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         // margin: const EdgeInsets.symmetric(horizontal: 25.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                          color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -414,7 +417,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         // margin: const EdgeInsets.symmetric(horizontal: 25.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                          color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -498,11 +502,14 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                         // print("data = $data");
 
                         return DoctorCard(
-                            doctorImagePath: snap[index]['image'][0],
-                            doctorName: snap[index]['name'],
-                            doctorProfession: snap[index]['mahali'],
-                            hospitalId:snap[index]['bio'],
-                            hospitalSnapshot:snapshot.data!,
+                            kiwanjaImagePath: snap[index]['image'],
+                            kiwanjaName: snap[index]['name'],
+                            kiwanjaMahali: snap[index]['mahali'],
+                            kiwanjaId:snap[index].id,
+                            kiwanjaNjia:snap[index].reference.path,
+                            kiwanjaBio:snap[index]['bio'],
+                            kiwanjaBei:snap[index]['bei'],
+                            kiwanjaSnapshot:snapshot.data!,
                             receptionPhone: snap[index]['user_phone'],
                             // user details
                             userFirstName:widget.userFirstName,

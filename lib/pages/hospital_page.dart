@@ -385,7 +385,16 @@ class _HospitalPageState extends State<HospitalPage> {
                           // var data = widget.hospitalSnapshot?.docs?[index].data();
                           // print("data = $data");
 
-                            return DoctorCard(doctorImagePath: doctorImage[index], doctorName: doctorName[index], doctorProfession: doctorProfession[index],hospitalId:widget.hospitalId,hospitalSnapshot:widget.hospitalSnapshot, receptionPhone: '',
+                            return DoctorCard(
+                                kiwanjaImagePath: doctorImage[index],
+                                kiwanjaName: doctorName[index],
+                                kiwanjaMahali: doctorProfession[index],
+                                kiwanjaId:widget.hospitalId,
+                                kiwanjaNjia:"snap[index].reference.path",
+                                kiwanjaBio:"snap[index]['bio']",
+                                kiwanjaBei:"snap[index]['bei']",
+                                kiwanjaSnapshot:widget.hospitalSnapshot,
+                                receptionPhone: '',
                                 // user details
                                 userFirstName:widget.userFirstName,
                                 userLastName:widget.userLastName,

@@ -5,6 +5,7 @@ import 'package:health_ai_test/components/doctor_card.dart';
 import '../components/options_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../components/personalize_button.dart';
 import '../components/survey_card.dart';
 
 class SurveyPlotPage extends StatefulWidget {
@@ -100,25 +101,13 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                       ]
                   ),
                   //profile
-                  InkWell(
-                    onTap: ()=>showDialog(context: context, builder: (BuildContext context) { return OptionsPopup(
-                        userFirstName:widget.userFirstName,
-                        userLastName:widget.userLastName,
-                        userAddress:widget.userAddress,
-                        userGender:widget.userGender,
-                        userPhone:widget.userPhone,
-                        userId:widget.userId); }),
-                    child: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.green[500],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        )
-                    ),
+                  PersonalizeButton(
+                      userFirstName:widget.userFirstName,
+                      userLastName:widget.userLastName,
+                      userAddress:widget.userAddress,
+                      userGender:widget.userGender,
+                      userPhone:widget.userPhone,
+                      userId:widget.userId
                   ),
                 ],
               ),
@@ -326,7 +315,8 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                         margin: const EdgeInsets.all(1.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                            color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -358,7 +348,8 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                         margin: const EdgeInsets.all(1.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                            color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -390,7 +381,8 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                         // margin: const EdgeInsets.symmetric(horizontal: 25.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                            color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -427,7 +419,8 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                         // margin: const EdgeInsets.symmetric(horizontal: 25.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Theme.of(context).cardColor,width: 1)
+                            border: Border.all(color: Theme.of(context).cardColor,width: 1),
+                            color: Color(0xFFC8E6C9),
                         ),
                         child: Container(
                           width: 120,
@@ -511,11 +504,14 @@ class _SurveyPlotPageState extends State<SurveyPlotPage> {
                         // print("data = $data");
 
                         return DoctorCard(
-                            doctorImagePath: snap[index]['image'][0],
-                            doctorName: snap[index]['name'],
-                            doctorProfession: snap[index]['mahali'],//mahali
-                            hospitalId:snap[index]['bio'],
-                            hospitalSnapshot:snapshot.data!,
+                            kiwanjaImagePath: snap[index]['image'],
+                            kiwanjaName: snap[index]['name'],
+                            kiwanjaMahali: snap[index]['mahali'],
+                            kiwanjaId:snap[index].id,
+                            kiwanjaNjia:snap[index].reference.path,
+                            kiwanjaBio:snap[index]['bio'],
+                            kiwanjaBei:snap[index]['bei'],
+                            kiwanjaSnapshot:snapshot.data!,
                             receptionPhone: snap[index]['user_phone'],
                             // user details
                             userFirstName:widget.userFirstName,
