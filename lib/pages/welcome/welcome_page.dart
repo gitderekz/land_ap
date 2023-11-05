@@ -33,8 +33,8 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     final mode = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-        ? 'dark theme'
-        : 'light theme';
+        ? 'Dark Theme'
+        : 'Light Theme';
     final textColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
         ? Colors.green
         : Colors.white;
