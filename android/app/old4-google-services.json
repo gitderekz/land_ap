@@ -126,14 +126,6 @@
           }
         },
         {
-          "client_id": "621630032907-prv7ak1msjotuvh3e6r6mf7uord2hjd7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.health_ai_test",
-            "certificate_hash": "254d62dfd893abc982dafc9262f1430df8b4d89c"
-          }
-        },
-        {
           "client_id": "621630032907-j4bf97d2hihsj531qoo2ce2t5cbafn01.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -168,14 +160,6 @@
           "android_info": {
             "package_name": "com.example.landap",
             "certificate_hash": "ffbb5818349172eb7bd306b04a37832cc119fdf4"
-          }
-        },
-        {
-          "client_id": "621630032907-9pp1os32mcj9tqc9872mspud7u2jqnqr.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.landap",
-            "certificate_hash": "254d62dfd893abc982dafc9262f1430df8b4d89c"
           }
         },
         {

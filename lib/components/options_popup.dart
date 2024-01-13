@@ -12,8 +12,9 @@ class OptionsPopup extends StatefulWidget {
   final userAddress;
   final userGender;
   final userPhone;
+  final userImage;
   final userId;
-  const OptionsPopup({Key? key,required this.userFirstName,required this.userLastName,required this.userGender,required this.userPhone,required this.userId,required this.userAddress}) : super(key: key);
+  const OptionsPopup({Key? key, required this.userFirstName, required this.userLastName, required this.userGender, required this.userPhone, required this.userImage, required this.userId, required this.userAddress}) : super(key: key);
 
   @override
   State<OptionsPopup> createState() => _OptionsPopupState();
@@ -27,6 +28,7 @@ class _OptionsPopupState extends State<OptionsPopup> {
     await _googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();
   }
+
   @override
   Widget build(BuildContext context) {
     // return showDialog(context: context, builder: (BuildContext context) { return SimpleDialog(title: Text(''),children: [],); });
@@ -42,81 +44,79 @@ class _OptionsPopupState extends State<OptionsPopup> {
           children: [
             //settings
             InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings(
-                    userFirstName:widget.userFirstName,
-                    userLastName:widget.userLastName,
-                    userAddress:widget.userAddress,
-                    userGender:widget.userGender,
-                    userPhone:widget.userPhone,
-                    userId:widget.userId)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Settings(userFirstName: widget.userFirstName, userLastName: widget.userLastName, userAddress: widget.userAddress, userGender: widget.userGender, userPhone: widget.userPhone, userImage: widget.userImage, userId: widget.userId)));
               },
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.green[100],
+                  color: Colors.deepOrangeAccent[100],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.settings,color: Colors.green,),
+                      Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                      ),
                       Text(
                         'Settings',
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
 
             //logout
             InkWell(
-              onTap: () async {
+              onTap: () {
                 // Navigator.pop(context);
-                await signUserOut();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AuthPage()));
+                signUserOut();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AuthPage()));
               },
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.green[100],
+                  color: Colors.deepOrangeAccent[200],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.logout,color: Colors.green,),
+                      Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ),
                       Text(
                         'Logout',
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
 
             //close
             InkWell(
-              onTap: ()=>Navigator.pop(context),
+              onTap: () => Navigator.pop(context),
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   color: Colors.red[100],
                   borderRadius: BorderRadius.circular(12),
@@ -124,18 +124,13 @@ class _OptionsPopupState extends State<OptionsPopup> {
                 child: Center(
                   child: Text(
                     'Close',
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ),
           ],
         ),
-
-
-
       ],
     );
   }

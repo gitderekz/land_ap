@@ -23,144 +23,147 @@ class QuickDeal extends StatefulWidget {
   final userPhone;
   final userId;
 
-  const QuickDeal({
-    Key? key,
-    required this.hospitalImagePath,
-    required this.hospitalName,
-    required this.hospitalLocation,
-    required this.hospitalDescription,
-    required this.hospitalSnapshot,
-    required this.hospitalId,
-    required this.receptionPhone,
-    required this.price,
-    // user details
-    required this.userFirstName,required this.userLastName,
-    required this.userGender,required this.userPhone,
-    required this.userId,required this.userAddress
-  }) : super(key: key);
+  const QuickDeal(
+      {Key? key,
+      required this.hospitalImagePath,
+      required this.hospitalName,
+      required this.hospitalLocation,
+      required this.hospitalDescription,
+      required this.hospitalSnapshot,
+      required this.hospitalId,
+      required this.receptionPhone,
+      required this.price,
+      // user details
+      required this.userFirstName,
+      required this.userLastName,
+      required this.userGender,
+      required this.userPhone,
+      required this.userId,
+      required this.userAddress})
+      : super(key: key);
 
   @override
   State<QuickDeal> createState() => _QuickDealState();
 }
 
 class _QuickDealState extends State<QuickDeal> {
-  void openHospitalPage(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>HospitalPage(
-        hospitalName:widget.hospitalName,
-        hospitalImage:widget.hospitalImagePath,
-        hospitalLocation:widget.hospitalLocation,
-        hospitalDescription:widget.hospitalDescription,
-        hospitalSnapshot:widget.hospitalSnapshot,
-        hospitalId:widget.hospitalId,
-        receptionPhone: widget.receptionPhone,
-        // user details
-        userFirstName:widget.userFirstName,
-        userLastName:widget.userLastName,
-        userAddress:widget.userAddress,
-        userGender:widget.userGender,
-        userPhone:widget.userPhone,
-        userId:widget.userId
-    )));
+  void openHospitalPage() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HospitalPage(
+                  hospitalName: widget.hospitalName,
+                  hospitalImage: widget.hospitalImagePath,
+                  hospitalLocation: widget.hospitalLocation,
+                  hospitalDescription: widget.hospitalDescription,
+                  hospitalSnapshot: widget.hospitalSnapshot,
+                  hospitalId: widget.hospitalId,
+                  receptionPhone: widget.receptionPhone,
+                  // user details
+                  userFirstName: widget.userFirstName,
+                  userLastName: widget.userLastName,
+                  userAddress: widget.userAddress,
+                  userGender: widget.userGender,
+                  userPhone: widget.userPhone,
+                  userId: widget.userId, userImage: 'null',
+                )));
   }
+
   @override
   Widget build(BuildContext context) {
-    final orangeCardColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-        ? Colors.green[100]
-        : Colors.amber[200];//Colors.green[200];
-    return
-      InkWell(
-        onTap: openHospitalPage,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-          child: Container(
-            width: 80,
-            // margin: EdgeInsets.symmetric(vertical: 4),
-            padding: EdgeInsets.all(4.0),
-            decoration: BoxDecoration(
-                // boxShadow: [BoxShadow(color: Colors.green,offset: Offset(2, -2),blurRadius: 4)],
-                color: Theme.of(context).cardColor,//,orangeCardColor
-                // gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100]),
-                borderRadius: BorderRadius.circular(12)
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //picture
-                Container(
-                  height:100,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: //Lottie.asset(widget.hospitalImagePath),
-                    Image.network(
-                      widget.hospitalImagePath,
-                      height: 100,
-                    ),
+    final orangeCardColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark ? Colors.green[100] : Colors.amber[200]; //Colors.green[200];
+    return InkWell(
+      onTap: openHospitalPage,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+        child: Container(
+          width: 80,
+          // margin: EdgeInsets.symmetric(vertical: 4),
+          padding: EdgeInsets.all(4.0),
+          decoration: BoxDecoration(
+              // boxShadow: [BoxShadow(color: Colors.green,offset: Offset(2, -2),blurRadius: 4)],
+              color: Theme.of(context).cardColor, //,orangeCardColor
+              // gradient: LinearGradient(colors: [Colors.white30,Colors.amber.shade100,Colors.deepOrange.shade100]),
+              borderRadius: BorderRadius.circular(12)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //picture
+              Container(
+                height: 100,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: //Lottie.asset(widget.hospitalImagePath),
+                      Image.network(
+                    widget.hospitalImagePath,
+                    height: 100,
                   ),
                 ),
-                SizedBox(height: 2,),
+              ),
+              // SizedBox(
+              //   height: 2,
+              // ),
 
-                //hospital name
-                Flexible(
-                  child: Text(
-                    widget.hospitalName,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        overflow: TextOverflow.clip
-                    ),
-                  ),
-                ),
+              //hospital name
+              Text(
+                widget.hospitalName,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, overflow: TextOverflow.clip),
+              ),
 
-                //plot title
-                Text(widget.hospitalLocation),
-                SizedBox(height: 2,),
-                //plot price
-                Text(widget.price),
-                SizedBox(height: 2,),
+              //plot title
+              Text(widget.hospitalLocation),
+              // SizedBox(
+              //   height: 2,
+              // ),
+              //plot price
+              Text(widget.price),
+              // SizedBox(
+              //   height: 2,
+              // ),
 
-                //read more
-                QuickDealReadMore(
-                    hospitalImagePath: widget.hospitalImagePath,
-                    hospitalName: widget.hospitalName,
-                    hospitalLocation: widget.hospitalLocation,
-                    hospitalDescription: widget.hospitalDescription,
-                    hospitalSnapshot: widget.hospitalSnapshot,
-                    hospitalId:widget.hospitalId,
-                    receptionPhone:widget.receptionPhone,
-                    // user details
-                    userFirstName:widget.userFirstName,
-                    userLastName:widget.userLastName,
-                    userAddress:widget.userAddress,
-                    userGender:widget.userGender,
-                    userPhone:widget.userPhone,
-                    userId:widget.userId
-                ),
-                SizedBox(height: 2,),
+              //read more
+              // QuickDealReadMore(
+              //     hospitalImagePath: widget.hospitalImagePath,
+              //     hospitalName: widget.hospitalName,
+              //     hospitalLocation: widget.hospitalLocation,
+              //     hospitalDescription: widget.hospitalDescription,
+              //     hospitalSnapshot: widget.hospitalSnapshot,
+              //     hospitalId: widget.hospitalId,
+              //     receptionPhone: widget.receptionPhone,
+              //     // user details
+              //     userFirstName: widget.userFirstName,
+              //     userLastName: widget.userLastName,
+              //     userAddress: widget.userAddress,
+              //     userGender: widget.userGender,
+              //     userPhone: widget.userPhone,
+              //     userId: widget.userId),
+              SizedBox(
+                height: 2,
+              ),
 
-                // //visit
-                // InkWell(
-                //   onTap: openHospitalPage,
-                //   child: Container(
-                //     padding: EdgeInsets.all(12),
-                //     decoration: BoxDecoration(
-                //       color: Colors.green[300],
-                //       borderRadius: BorderRadius.circular(12),
-                //     ),
-                //     child: Center(
-                //       child: Text(
-                //         AppLocalizations.of(context)!.visit,
-                //         style: TextStyle(color: Colors.white),
-                //       ),
-                //     ),
-                //   ),
-                // )
-
-              ],
-            ),
+              // //visit
+              // InkWell(
+              //   onTap: openHospitalPage,
+              //   child: Container(
+              //     padding: EdgeInsets.all(12),
+              //     decoration: BoxDecoration(
+              //       color: Colors.green[300],
+              //       borderRadius: BorderRadius.circular(12),
+              //     ),
+              //     child: Center(
+              //       child: Text(
+              //         AppLocalizations.of(context)!.visit,
+              //         style: TextStyle(color: Colors.white),
+              //       ),
+              //     ),
+              //   ),
+              // )
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 }

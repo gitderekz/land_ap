@@ -30,5 +30,6 @@
     "visit": "Besuch",
     "close": "Nah dran",
     "read_more": "Weiterlesen",
-    "hospital_list": "Liste der Krankenhäuser"
+    "hospital_list": "Liste der Krankenhäuser",
+    "payment": "pay here to continue"
 }

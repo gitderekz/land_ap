@@ -18,7 +18,7 @@ class DoctorAppointment extends StatefulWidget {
   final userGender;
   final userPhone;
   final userId;
-  DoctorAppointment({Key? key,required this.doctorId,required this.doctorName, required this.hospitalSnapshot,required this.userFirstName,required this.userLastName,required this.userAddress,required this.userGender,required this.userPhone,required this.userId}) : super(key: key);
+  DoctorAppointment({Key? key, required this.doctorId, required this.doctorName, required this.hospitalSnapshot, required this.userFirstName, required this.userLastName, required this.userAddress, required this.userGender, required this.userPhone, required this.userId}) : super(key: key);
 
   @override
   State<DoctorAppointment> createState() => _DoctorAppointmentState();
@@ -28,8 +28,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
   int value = 0;
   bool positive = false;
   bool loading = false;
-  late CollectionReference doctorsReference,appointmentsReference;
-  List hospitalList = [],timeList = [],dateList = [],doctorList = [],appointmentIdList = [],hospitalIdList = [],toggleValueList = [];
+  late CollectionReference doctorsReference, appointmentsReference;
+  List hospitalList = [], timeList = [], dateList = [], doctorList = [], appointmentIdList = [], hospitalIdList = [], toggleValueList = [];
   final DataTableSource _data = MyData();
   final userCollection = FirebaseFirestore.instance.collection('users');
 
@@ -40,35 +40,32 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
     loadAppointments();
   }
 
-  TextStyle textStyle(){
-    return TextStyle(
-      color: Colors.green,
-      fontWeight: FontWeight.bold
-    );
+  TextStyle textStyle() {
+    return TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
   }
 
-  void loadAppointments(){
+  void loadAppointments() {
     widget.hospitalSnapshot.docs.forEach((element) {
       // if(widget.hospitalId == element.id){
-        print('hospitali = ${element.id} ${widget.doctorId}');
-        appointmentsReference = element.reference.collection('appointments');
-        appointmentsReference.get().then((value) {
-          if(mounted){
-            setState(() {
-              for(int x=0;x<value.size;x++){
-                if(widget.doctorId == value.docs[x].get('doctor_id')){
+      print('hospitali = ${element.id} ${widget.doctorId}');
+      appointmentsReference = element.reference.collection('appointments');
+      appointmentsReference.get().then((value) {
+        if (mounted) {
+          setState(() {
+            for (int x = 0; x < value.size; x++) {
+              if (widget.doctorId == value.docs[x].get('doctor_id')) {
                 //   doctorList.add(value.docs[x].get('doctor'));
-                  hospitalIdList.add(element.id);
-                  appointmentIdList.add(value.docs[x].id);
-                  toggleValueList.add(value.docs[x].get('answer'));
-                  hospitalList.add(value.docs[x].get('hospital').toString().replaceAll(' ', '\n'));
-                  dateList.add(value.docs[x].get('date'));
-                  timeList.add(value.docs[x].get('time'));
-                }
+                hospitalIdList.add(element.id);
+                appointmentIdList.add(value.docs[x].id);
+                toggleValueList.add(value.docs[x].get('answer'));
+                hospitalList.add(value.docs[x].get('hospital').toString().replaceAll(' ', '\n'));
+                dateList.add(value.docs[x].get('date'));
+                timeList.add(value.docs[x].get('time'));
               }
-            });
-          }
-        });
+            }
+          });
+        }
+      });
       // }
     });
   }
@@ -90,32 +87,35 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: () { Navigator.pop(context); },),
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                     ],
                   ),
                   //Name
-                  Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8,),
-                        Text('Hi, dr. ${widget.doctorName}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        )
-                      ]
-                  ),
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Hi, dr. ${widget.doctorName}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    )
+                  ]),
 
                   //profile
                   InkWell(
-                    onTap: ()=>showDialog(context: context, builder: (BuildContext context) { return OptionsPopup(
-                        userFirstName:widget.userFirstName,
-                        userLastName:widget.userLastName,
-                        userAddress:widget.userAddress,
-                        userGender:widget.userGender,
-                        userPhone:widget.userPhone,
-                        userId:widget.userId); }),
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return OptionsPopup(userFirstName: widget.userFirstName, userLastName: widget.userLastName, userAddress: widget.userAddress, userGender: widget.userGender, userPhone: widget.userPhone, userImage: 'widget.userImage', userId: widget.userId);
+                        }),
                     child: Container(
                         padding: EdgeInsets.all(12),
                         decoration: BoxDecoration(
@@ -125,18 +125,19 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
-                        )
-                    ),
+                        )),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
 
             // main body
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: 8.0,right: 8.0,bottom: 8.0),
+                margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
                 padding: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
@@ -144,20 +145,21 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 8.0,),
+                    SizedBox(
+                      height: 8.0,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text('Hospital',style: textStyle()),
-                        Text('Time',style: textStyle()),
-                        Text('Answer',style: textStyle()),
+                        Text('Hospital', style: textStyle()),
+                        Text('Time', style: textStyle()),
+                        Text('Answer', style: textStyle()),
                       ],
                     ),
                     Divider(
                       thickness: 1.0,
                       color: Theme.of(context).dividerColor,
                     ),
-
                     Flexible(
                       child: ListView.builder(
                         itemCount: timeList.length,
@@ -166,24 +168,25 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                           return Container(
                             padding: EdgeInsets.symmetric(vertical: 8),
                             child: ConstrainedBox(
-                              constraints: BoxConstraints.expand(width: 2.0,height: 70),
-                              child:
-                              Column(
+                              constraints: BoxConstraints.expand(width: 2.0, height: 70),
+                              child: Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text('${index+1}'),
+                                      Text('${index + 1}'),
                                       Text('${hospitalList[index]}'),
-                                      Text('${dateList[index]}\n${timeList[index]}',),
+                                      Text(
+                                        '${dateList[index]}\n${timeList[index]}',
+                                      ),
                                       AnimatedToggleSwitch<bool>.dual(
-                                        current: toggleValueList[index],//positive,
+                                        current: toggleValueList[index], //positive,
                                         first: false,
                                         second: true,
                                         dif: 35.0,
                                         borderColor: Colors.transparent,
-                                        borderWidth: 0.0,//5.0,
+                                        borderWidth: 0.0, //5.0,
                                         height: 45,
                                         boxShadow: const [
                                           BoxShadow(
@@ -194,19 +197,15 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                           ),
                                         ],
                                         onChanged: (b) {
-                                          setState(() => toggleValueList[index] = b/*positive = b*/);
-                                          print('current at = ${index+1}, ${hospitalIdList[index]}, ${appointmentIdList[index]}');
-                                          FirebaseFirestore.instance.collection('hospitals').doc(hospitalIdList[index]).collection('appointments')
-                                              .doc(appointmentIdList[index])
-                                              .update(
-                                              {
-                                                'doctor':widget.doctorName,
-                                                'answer':toggleValueList[index],
-                                                // 'doctor_id':widget.doctorId,
-                                                // 'date':dateController,
-                                                // 'time':timeController
-                                              }
-                                              );
+                                          setState(() => toggleValueList[index] = b /*positive = b*/);
+                                          print('current at = ${index + 1}, ${hospitalIdList[index]}, ${appointmentIdList[index]}');
+                                          FirebaseFirestore.instance.collection('hospitals').doc(hospitalIdList[index]).collection('appointments').doc(appointmentIdList[index]).update({
+                                            'doctor': widget.doctorName,
+                                            'answer': toggleValueList[index],
+                                            // 'doctor_id':widget.doctorId,
+                                            // 'date':dateController,
+                                            // 'time':timeController
+                                          });
                                           //     .set(
                                           //     {
                                           //       'doctor':chosenDoctor,
@@ -217,13 +216,16 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                           // );
                                           return Future.delayed(Duration(seconds: 2));
                                         },
-                                        colorBuilder: (b) => b ? Colors.green : Theme.of(context).cardColor,// Colors.black12,
+                                        colorBuilder: (b) => b ? Colors.green : Theme.of(context).cardColor, // Colors.black12,
                                         iconBuilder: (value) => value
-                                            ? Icon(Icons.check_circle,color: Colors.white,)
-                                            : Icon(Icons.cancel, ),
-                                        textBuilder: (value) => value
-                                            ? Center(child: Text('accepted'))
-                                            : Center(child: Text('declined')),
+                                            ? Icon(
+                                                Icons.check_circle,
+                                                color: Colors.white,
+                                              )
+                                            : Icon(
+                                                Icons.cancel,
+                                              ),
+                                        textBuilder: (value) => value ? Center(child: Text('accepted')) : Center(child: Text('declined')),
                                       ),
                                     ],
                                   ),
@@ -285,13 +287,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
 // The "soruce" of the table
 class MyData extends DataTableSource {
   // Generate some made-up data
-  final List<Map<String, dynamic>> _data = List.generate(
-      200,
-          (index) => {
-        "id": index,
-        "title": "Item $index",
-        "price": Random().nextInt(10000)
-      });
+  final List<Map<String, dynamic>> _data = List.generate(200, (index) => {"id": index, "title": "Item $index", "price": Random().nextInt(10000)});
 
   @override
   bool get isRowCountApproximate => false;

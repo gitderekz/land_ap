@@ -32,16 +32,16 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final mode = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-        ? 'Dark Theme'
-        : 'Light Theme';
+    final mode = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark ? 'Dark Theme' : 'Light Theme';
     final textColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-        ? Colors.green
+        // ? Colors.green
+        ? Colors.orangeAccent
         : Colors.white;
     final welcomePageColor = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
         ? Color(0xFF1B1E1F)
-        : Colors.green;
-    return  Scaffold(
+        // : Colors.green;
+        : Colors.orangeAccent;
+    return Scaffold(
       backgroundColor: welcomePageColor,
       body: Stack(
         alignment: AlignmentDirectional.topStart,
@@ -73,11 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                   children: [
                                     Text(
                                       '${mode}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: textColor
-                                      ),
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                                     ),
                                     ChangeThemeButtonWidget(),
                                   ],
@@ -94,13 +90,11 @@ class _WelcomePageState extends State<WelcomePage> {
                               Text(
                                 AppLocalizations.of(context)!.choose_lang,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: textColor
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -123,7 +117,9 @@ class _WelcomePageState extends State<WelcomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 0.0,),
+                        SizedBox(
+                          height: 0.0,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -137,8 +133,17 @@ class _WelcomePageState extends State<WelcomePage> {
                               child: TextButton(
                                 child: Row(
                                   children: [
-                                    Text('NEXT',style: TextStyle(color: textColor,fontSize: 20,),),
-                                    Icon(Icons.navigate_next,color: Colors.green,),
+                                    Text(
+                                      'NEXT',
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.navigate_next,
+                                      color: Colors.orangeAccent,
+                                    ),
                                   ],
                                 ),
                                 onPressed: () {
@@ -160,21 +165,15 @@ class _WelcomePageState extends State<WelcomePage> {
                           Lottie.asset('assets/jsons/business.json'),
                           Text(
                             'Welcome to',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: textColor
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                           ),
                           Text(
                             'Land Ap',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: textColor
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -188,8 +187,17 @@ class _WelcomePageState extends State<WelcomePage> {
                                 child: TextButton(
                                   child: Row(
                                     children: [
-                                      Text('NEXT',style: TextStyle(color: textColor,fontSize: 20,),),
-                                      Icon(Icons.navigate_next,color: Colors.green,),
+                                      Text(
+                                        'NEXT',
+                                        style: TextStyle(
+                                          color: textColor,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.navigate_next,
+                                        color: Colors.orangeAccent,
+                                      ),
                                     ],
                                   ),
                                   onPressed: () {
@@ -213,11 +221,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           Text(
                             'This app is dedicated to \nsimplify land services',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: textColor
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                             // style: TextStyle(
                             //     fontWeight: FontWeight.bold,
                             //     fontSize: 30,
@@ -226,13 +230,11 @@ class _WelcomePageState extends State<WelcomePage> {
                           ),
                           Text(
                             '..',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                                color: Colors.green[300]
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.green[300]),
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -246,8 +248,17 @@ class _WelcomePageState extends State<WelcomePage> {
                                 child: TextButton(
                                   child: Row(
                                     children: [
-                                      Text('NEXT',style: TextStyle(color: textColor,fontSize: 20,),),
-                                      Icon(Icons.navigate_next,color: Colors.green,),
+                                      Text(
+                                        'NEXT',
+                                        style: TextStyle(
+                                          color: textColor,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.navigate_next,
+                                        color: Colors.orangeAccent,
+                                      ),
                                     ],
                                   ),
                                   onPressed: () {
@@ -270,34 +281,24 @@ class _WelcomePageState extends State<WelcomePage> {
                         Center(
                           child: Text(
                             'We bring',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: textColor
-                            ),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                           ),
                         ),
                         Center(
                           child: Text(
-                            'Land services',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: textColor
-                            ),
+                            'land services',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                           ),
                         ),
                         Center(
                           child: Text(
-                            'Close to you',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: textColor
-                            ),
+                            'close to you',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
                           ),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -305,18 +306,27 @@ class _WelcomePageState extends State<WelcomePage> {
                               padding: const EdgeInsets.all(10.0),
                               margin: EdgeInsets.only(right: 10),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  // color: Colors.green[300]
+                                borderRadius: BorderRadius.circular(20.0),
+                                // color: Colors.green[300]
                               ),
                               child: TextButton(
                                 child: Row(
                                   children: [
-                                    Text('START',style: TextStyle(color: textColor,fontSize: 20,),),
-                                    Icon(Icons.navigate_next,color: Colors.green,),
+                                    Text(
+                                      'START',
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.navigate_next,
+                                      color: Colors.orangeAccent,
+                                    ),
                                   ],
                                 ),
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthPage()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AuthPage()));
                                 },
                               ),
                             ),
@@ -330,9 +340,12 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
           ),
           Container(
-            alignment: Alignment(0, 0.8),
-            child: SmoothPageIndicator(controller: _controller, count: 4,effect: WormEffect(activeDotColor: mode=="dark theme"?Colors.green:Colors.white ),)
-          ),
+              alignment: Alignment(0, 0.8),
+              child: SmoothPageIndicator(
+                controller: _controller,
+                count: 4,
+                effect: WormEffect(activeDotColor: mode == "dark theme" ? Colors.green : Colors.white),
+              )),
         ],
       ),
     );

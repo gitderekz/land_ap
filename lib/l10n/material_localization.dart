@@ -5,6 +5,7 @@ class MaterialLocalizationItDelegate extends LocalizationsDelegate<MaterialLocal
   /// Here list supported country and language codes
   @override
   bool isSupported(Locale locale) => locale.languageCode == "sw";
+
   /// Here create an instance of your [MaterialLocalizations] subclass
   @override
   Future<MaterialLocalizations> load(Locale locale) async => MaterialLocalizationIt();
@@ -632,5 +633,17 @@ class MaterialLocalizationIt extends MaterialLocalizations {
     // TODO: implement scrimOnTapHint
     throw UnimplementedError();
   }
+
+  @override
+  // TODO: implement lookUpButtonLabel
+  String get lookUpButtonLabel => throw UnimplementedError();
+
+  @override
+  // TODO: implement searchWebButtonLabel
+  String get searchWebButtonLabel => throw UnimplementedError();
+
+  @override
+  // TODO: implement shareButtonLabel
+  String get shareButtonLabel => throw UnimplementedError();
   // alt-enter on intellij and implement many overrides (somthing like 57)
 }

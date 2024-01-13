@@ -15,18 +15,20 @@ class WelcomeGradientBackground extends StatefulWidget {
 
 class WelcomeGradientBackgroundState extends State<WelcomeGradientBackground> {
   List _colors = [
+    // const Color(0xFFE0F2F1),
+    // const Color(0xFF00E676),
+    // Colors.green,
     // const Color(0xCCEFFFCC),
     // const Color(0xFFEFBBBB),
     // const Color(0xFFEFFFFC),
-    const Color(0xFFE0F2F1),
-    const Color(0xFF00E676),
     // const Color(0xFFEFCCBC),
-
     // const Color(0xFFE0F2F1),
-
     // const Color(0xFFEECDA3),
     // const Color(0xFFEF629F),
-    Colors.green
+
+    const Color.fromARGB(255, 245, 242, 238),
+    const Color(0xFFEFCCBC),
+    Colors.orangeAccent,
   ];
 
   int _currentColorIndex = 0;
@@ -57,49 +59,55 @@ class WelcomeGradientBackgroundState extends State<WelcomeGradientBackground> {
 
   @override
   Widget build(BuildContext context) {
-    _colors = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark?[
-      Theme.of(context).cardColor,
-      Colors.black87,
-      Colors.grey[900],
-    ]:[
-      // const Color(0xFFF9FBE7),
-      // const Color(0xFFF0F4C3),
-      const Color(0xFFE0F2F1),
-      const Color(0xFFC8E6C9),
-      // const Color(0xFF4CAF50),
-      // const Color(0xFF00E676),
-    ];
-    return widget.child != null?
-    AnimatedContainer(
-      padding: widget.padding,
-      duration: const Duration(seconds: 1),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5.0),bottomRight: Radius.circular(5.0)),
-        gradient: LinearGradient(
-          colors: [
-            _colors[_currentColorIndex], // Use the current color
-            _colors[(_currentColorIndex + 1) % _colors.length], // Use the next color in the list
-            _colors[(_currentColorIndex + 1) % _colors.length], // Use the next color in the list
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      child: widget.child,
-    ):
-    AnimatedContainer(
-      height: 200,
-      duration: const Duration(seconds: 1),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            _colors[_currentColorIndex], // Use the current color
-            _colors[(_currentColorIndex + 1) % _colors.length], // Use the next color in the list
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-    );
+    _colors = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+        ? [
+            Theme.of(context).cardColor,
+            Colors.black87,
+            Colors.grey[900],
+          ]
+        : [
+            // const Color(0xFFF9FBE7),
+            // const Color(0xFFF0F4C3),
+            // const Color(0xFFE0F2F1),
+            // const Color(0xFFC8E6C9),
+            // const Color(0xFF4CAF50),
+            // const Color(0xFF00E676),
+
+            Color.fromARGB(255, 245, 242, 238),
+            const Color(0xFFEFCCBC),
+            // const Color(0xFFEECDA3),
+          ];
+    return widget.child != null
+        ? AnimatedContainer(
+            padding: widget.padding,
+            duration: const Duration(seconds: 1),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5.0), bottomRight: Radius.circular(5.0)),
+              gradient: LinearGradient(
+                colors: [
+                  _colors[_currentColorIndex], // Use the current color
+                  _colors[(_currentColorIndex + 1) % _colors.length], // Use the next color in the list
+                  _colors[(_currentColorIndex + 1) % _colors.length], // Use the next color in the list
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: widget.child,
+          )
+        : AnimatedContainer(
+            height: 200,
+            duration: const Duration(seconds: 1),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  _colors[_currentColorIndex], // Use the current color
+                  _colors[(_currentColorIndex + 1) % _colors.length], // Use the next color in the list
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          );
   }
 }

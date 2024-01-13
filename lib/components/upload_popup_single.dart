@@ -18,7 +18,7 @@ class UploadPopupSingle extends StatefulWidget {
   final userGender;
   final userPhone;
   final userId;
-  const UploadPopupSingle({Key? key,required this.userFirstName,required this.userLastName,required this.userGender,required this.userPhone,required this.userId,required this.userAddress}) : super(key: key);
+  const UploadPopupSingle({Key? key, required this.userFirstName, required this.userLastName, required this.userGender, required this.userPhone, required this.userId, required this.userAddress}) : super(key: key);
 
   @override
   State<UploadPopupSingle> createState() => _UploadPopupSingleState();
@@ -37,10 +37,10 @@ class _UploadPopupSingleState extends State<UploadPopupSingle> {
     });
   }
 
-  void saveProfile() async{
+  void saveProfile() async {
     String name = nameController.text;
     String bio = bioController.text;
-    String message = await StoreSingleData().saveSingleData(name: name, bio: bio, file: _image!,userFirstName: widget.userFirstName,userLastName: widget.userLastName,userPhone: widget.userPhone,userId: widget.userId);
+    String message = await StoreSingleData().saveSingleData(name: name, bio: bio, file: _image!, userFirstName: widget.userFirstName, userLastName: widget.userLastName, userPhone: widget.userPhone, userId: widget.userId, context: context);
   }
 
   // sign user out method
@@ -49,7 +49,6 @@ class _UploadPopupSingleState extends State<UploadPopupSingle> {
     await _googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,24 +66,23 @@ class _UploadPopupSingleState extends State<UploadPopupSingle> {
             //picha za kiwanja
             Stack(
               children: [
-                _image != null?
-                CircleAvatar(
-                    radius: 65,
-                    backgroundImage: MemoryImage(_image!)
-                ):
-                const CircleAvatar(
-                  radius: 65,
-                  backgroundColor: Colors.green,
-                  backgroundImage: NetworkImage('https://img.icons8.com/?size=512&id=2upK8qlqCAEf&format=png'),//AssetImage('assets/images/location_icon.png'),
-                  // child: Icon(Icons.person,size: 80,),
-                ),
+                _image != null
+                    ? CircleAvatar(radius: 65, backgroundImage: MemoryImage(_image!))
+                    : const CircleAvatar(
+                        radius: 65,
+                        backgroundColor: Colors.green,
+                        backgroundImage: NetworkImage('https://img.icons8.com/?size=512&id=2upK8qlqCAEf&format=png'), //AssetImage('assets/images/location_icon.png'),
+                        // child: Icon(Icons.person,size: 80,),
+                      ),
                 Positioned(
                   bottom: -10,
                   left: 80,
                   child: IconButton(
                       onPressed: selectImage,
-                      icon: const Icon(Icons.add_a_photo,color: Colors.black,)
-                  ),
+                      icon: const Icon(
+                        Icons.add_a_photo,
+                        color: Colors.black,
+                      )),
                 ),
               ],
             ),
@@ -126,7 +124,7 @@ class _UploadPopupSingleState extends State<UploadPopupSingle> {
               },
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   color: Colors.green[100],
                   borderRadius: BorderRadius.circular(12),
@@ -135,28 +133,30 @@ class _UploadPopupSingleState extends State<UploadPopupSingle> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.cloud_upload_rounded,color: Colors.green,),
+                      Icon(
+                        Icons.cloud_upload_rounded,
+                        color: Colors.green,
+                      ),
                       Text(
                         'hifadhi wasifu',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
 
             //close
             InkWell(
-              onTap: ()=>Navigator.pop(context),
+              onTap: () => Navigator.pop(context),
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   color: Colors.red[100],
                   borderRadius: BorderRadius.circular(12),
@@ -164,18 +164,13 @@ class _UploadPopupSingleState extends State<UploadPopupSingle> {
                 child: Center(
                   child: Text(
                     'Close',
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ),
           ],
         ),
-
-
-
       ],
     );
   }

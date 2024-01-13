@@ -15,7 +15,7 @@ class PaymentsPopup extends StatefulWidget {
   final userGender;
   final userPhone;
   final userId;
-  const PaymentsPopup({Key? key,required this.userFirstName,required this.userLastName,required this.userGender,required this.userPhone,required this.userId,required this.userAddress}) : super(key: key);
+  const PaymentsPopup({Key? key, required this.userFirstName, required this.userLastName, required this.userGender, required this.userPhone, required this.userId, required this.userAddress}) : super(key: key);
 
   @override
   State<PaymentsPopup> createState() => _PaymentsPopupState();
@@ -29,10 +29,12 @@ class _PaymentsPopupState extends State<PaymentsPopup> {
     await _googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();
   }
+
   @override
   Widget build(BuildContext context) {
     // return showDialog(context: context, builder: (BuildContext context) { return SimpleDialog(title: Text(''),children: [],); });
     return SimpleDialog(
+      backgroundColor: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -50,30 +52,32 @@ class _PaymentsPopupState extends State<PaymentsPopup> {
               },
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.green[100],
+                  color: Colors.orangeAccent[100],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.call_outlined,color: Colors.green,),
+                      Icon(
+                        Icons.call_outlined,
+                        color: Colors.orange,
+                      ),
                       Text(
                         'Serikali',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             // malipo ya ada ya application
             InkWell(
               onTap: () async {
@@ -82,30 +86,32 @@ class _PaymentsPopupState extends State<PaymentsPopup> {
               },
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.green[100],
+                  color: Colors.orangeAccent[100],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.call_outlined,color: Colors.green,),
+                      Icon(
+                        Icons.call_outlined,
+                        color: Colors.orange,
+                      ),
                       Text(
                         'Ada ya app',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             // malipo ya kusajili kampuni
             InkWell(
               onTap: () async {
@@ -114,30 +120,32 @@ class _PaymentsPopupState extends State<PaymentsPopup> {
               },
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.green[100],
+                  color: Colors.orangeAccent[100],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.call_outlined,color: Colors.green,),
+                      Icon(
+                        Icons.call_outlined,
+                        color: Colors.orange,
+                      ),
                       Text(
                         'Sajili kampuni',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             // malipo ya kampuni iliyosajiliwa
             InkWell(
               onTap: () async {
@@ -146,37 +154,39 @@ class _PaymentsPopupState extends State<PaymentsPopup> {
               },
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.green[100],
+                  color: Colors.orangeAccent[100],
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.call_outlined,color: Colors.green,),
+                      Icon(
+                        Icons.call_outlined,
+                        color: Colors.orange,
+                      ),
                       Text(
                         'Kampuni iliyosajiliwa',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
 
             //close
             InkWell(
-              onTap: ()=>Navigator.pop(context),
+              onTap: () => Navigator.pop(context),
               child: Container(
                 width: 150,
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   color: Colors.red[100],
                   borderRadius: BorderRadius.circular(12),
@@ -184,18 +194,13 @@ class _PaymentsPopupState extends State<PaymentsPopup> {
                 child: Center(
                   child: Text(
                     'Close',
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ),
           ],
         ),
-
-
-
       ],
     );
   }

@@ -16,7 +16,7 @@
          }
       }
     },
-    "choose_lang": "Choose Theme\nAnd\nLanguage",
+    "choose_lang": "Choose theme\nand\nlanguage",
     "how_do_you_feel": "Tax & Fee",
     "how_do_you_feel_text": "Pay government land tax and application fee right now",
     "get_started": "Get Started",
@@ -44,5 +44,6 @@
     "visit": "Visit",
     "close": "Close",
     "read_more": "Read more",
-    "hospital_list": "Our services"
+    "hospital_list": "Our services",
+    "payment": "Pay here to continue"
 }

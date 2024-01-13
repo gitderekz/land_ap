@@ -43,21 +43,25 @@ class _LoginPageState extends State<LoginPage> {
 
     // try sign in
     try {
+      print('TRY..');
       // sign in with gmail
-      if(signin_type){
+      if (signin_type) {
+        print('SIGNI TYPE..');
         // await _googleSignIn.signIn() ;
         final GoogleSignIn googleSignIn = GoogleSignIn();
         final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+        print('SIGN..');
         if (googleSignInAccount != null) {
-          final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
-          final AuthCredential authCredential = GoogleAuthProvider.credential(
-              idToken: googleSignInAuthentication.idToken,
-              accessToken: googleSignInAuthentication.accessToken);
+          print('ACCOUNT..');
+          final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+          final AuthCredential authCredential = GoogleAuthProvider.credential(idToken: googleSignInAuthentication.idToken, accessToken: googleSignInAuthentication.accessToken);
 
           // Getting users credential
+          print('CREDENTIAL..');
           UserCredential result = await auth.signInWithCredential(authCredential);
           User? user = result.user;
+
+          print('USER..');
 
           if (result != null) {
             print('IMEFANIKIWA');
@@ -66,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
           }
         }
-      }else{
+      } else {
         // sign in with email & password
         await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text,
@@ -81,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pop(context);
       // show error message
       showErrorMessage(e.code);
+      print('ERROR..');
     }
   }
 
@@ -115,7 +120,11 @@ class _LoginPageState extends State<LoginPage> {
 
                 // logo
                 // Lottie.asset('assets/jsons/heartbeat-love.json'),
-                Image.asset('assets/icons/logo.ico',width: 100,height: 100,),
+                Image.asset(
+                  'assets/icons/logo.ico',
+                  width: 100,
+                  height: 100,
+                ),
 
                 const SizedBox(height: 50),
 
@@ -166,20 +175,22 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     // google button
                     InkWell(
-                      onTap: (){type = true;signUserIn(type);},
-                      child: Column(
-                        children: [
-                          SquareTile(imagePath: 'assets/images/google.png'),
-                          Text(
-                            'Login With Gmail',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                        onTap: () {
+                          type = true;
+                          signUserIn(type);
+                        },
+                        child: Column(
+                          children: [
+                            SquareTile(imagePath: 'assets/images/google.png'),
+                            Text(
+                              'Login With Gmail',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ),
+                          ],
+                        )),
 
                     // SizedBox(width: 25),
                     //
@@ -212,7 +223,9 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
 
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),
