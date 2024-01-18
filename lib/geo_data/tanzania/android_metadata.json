@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"name": "android_metadata",
+"features": [
+{ "type": "Feature", "properties": { "locale": "en_US" }, "geometry": null }
+]
+}

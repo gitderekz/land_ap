@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:health_ai_test/components/service_mini_card.dart';
+import 'package:health_ai_test/geo_data/tanzania/districts.dart';
+import 'package:health_ai_test/geo_data/tanzania/regions.dart';
+import 'package:health_ai_test/geo_data/tanzania/ward.dart';
 import 'package:health_ai_test/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 import '../components/options_popup.dart';
@@ -42,23 +45,11 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
     'Uganda',
   ];
   String mkoa = '-Mkoa';
-  List orodhaMkoa = [
-    '-Mkoa',
-    'Arusha',
-    'Dar es salaam',
-    'Dodoma',
-    'Kilimanjaro',
-    'Mwanza',
-  ];
+  List orodhaMkoa = ['-Mkoa']; //regions_class.all_regions();
   String wilaya = '-Wilaya';
-  List orodhaWilaya = [
-    '-Wilaya',
-    'Kinondoni',
-    'Ilala',
-    'Temeke',
-    'Ubungo',
-    'Kawe',
-  ];
+  List orodhaWilaya = ['-Wilaya']; //districts_class.all_districts();
+  String ward = '-Ward';
+  List orodhaWard = ['-Ward']; //wards_class.all_wards();
   String matumizi = '-Matumizi';
   List orodhaMatumizi = [
     '-Matumizi',
@@ -363,6 +354,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                             onChanged: (newValue) {
                               setState(() {
                                 nchi = newValue.toString();
+                                mkoa = '-Mkoa';
+                                orodhaMkoa = regions_class.filtered_regions(nchi);
                               });
                             },
                             items: orodhaNchi.map((value) {
@@ -393,6 +386,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                             onChanged: (newValue) {
                               setState(() {
                                 mkoa = newValue.toString();
+                                wilaya = '-Wilaya';
+                                orodhaWilaya = districts_class.filtered_districts(mkoa);
                               });
                             },
                             items: orodhaMkoa.map((value) {
@@ -423,6 +418,8 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                             onChanged: (newValue) {
                               setState(() {
                                 wilaya = newValue.toString();
+                                ward = '-Ward';
+                                orodhaWard = wards_class.filtered_wards(wilaya);
                               });
                             },
                             items: orodhaWilaya.map((value) {
@@ -437,6 +434,37 @@ class _BuyPlotPageState extends State<BuyPlotPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      // ward
+                      Container(
+                        // margin: const EdgeInsets.symmetric(horizontal: 25.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Theme.of(context).cardColor, width: 1),
+                          color: greenCardColor,
+                        ),
+                        child: Container(
+                          width: 120,
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: DropdownButton(
+                            hint: Text('Chagua kata'),
+                            isExpanded: true,
+                            value: ward,
+                            icon: Icon(Icons.arrow_drop_down),
+                            iconSize: 36.0,
+                            underline: SizedBox(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                ward = newValue.toString();
+                              });
+                            },
+                            items: orodhaWard.map((value) {
+                              // jazaOrodhaKundi();
+                              return DropdownMenuItem(value: value, child: Text(value, style: TextStyle(fontSize: 14, overflow: TextOverflow.ellipsis)));
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+
                       // matumizi
                       Container(
                         // margin: const EdgeInsets.symmetric(horizontal: 25.0),
